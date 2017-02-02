@@ -11,10 +11,10 @@ import Foundation
 let defaultErrorDomain = "Log4s"
 
 extension NSError{
-    static func create(domain:String = defaultErrorDomain, code:Int, desp:String) -> NSError{
+    static func make(domain:String = defaultErrorDomain, code:Int, desp:String) -> NSError{
         return NSError(domain: domain, code: code, userInfo: ["NSLocalizedDescriptionKey" : desp])
     }
 }
 
-class Error {
-}
+//class Error {
+//}

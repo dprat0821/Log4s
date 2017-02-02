@@ -61,9 +61,9 @@ class SimpleXMLNode: NSObject {
      */
     func dictionaryRepresentation() -> AnyObject {
         
-        guard children?.count > 0 else {
+        guard (children?.count)! > 0 else {
             // Node is a leaf (i.e., terminal) element. Return string value:
-            return content ?? ""
+            return content as AnyObject? ?? "" as AnyObject
         }
         
         // Node has children. Return array or dictionaries...
@@ -99,11 +99,11 @@ class SimpleXMLNode: NSObject {
             else{
                 // Array contains one or more elements of the same name; add it
                 // as-is:
-                dictionary[name] = array
+                dictionary[name] = array as AnyObject?
             }
         }
         
-        return dictionary
+        return dictionary as AnyObject
     }
     
 }

@@ -63,18 +63,18 @@ class SimpleXMLParser: NSObject {
     
     
     /// Cocoa parser object.
-    private let parser: NSXMLParser!
+    private let parser: XMLParser!
     
     
     ///
-    typealias XMLParseCompletionHandler = (result:[String : AnyObject]) -> (Void)
+    typealias XMLParseCompletionHandler = (_ result:[String : AnyObject]) -> (Void)
     
     
     ///
     private let completionHandler:XMLParseCompletionHandler
     
     ///
-    typealias XMLParseErrorHandler = (error:NSError) -> (Void)
+    typealias XMLParseErrorHandler = (_ error:NSError) -> (Void)
     
     ///
     private let errorHandler:XMLParseErrorHandler
@@ -92,13 +92,13 @@ class SimpleXMLParser: NSObject {
      - parameter parseErrorHandler: Closure to execute if and when the parser encounters an error and aborts.
      */
     init(withSourceData dataToParse:NSData,
-        parseCompletionHandler:XMLParseCompletionHandler,
-        parseErrorHandler:XMLParseErrorHandler
+        parseCompletionHandler:@escaping XMLParseCompletionHandler,
+        parseErrorHandler:@escaping XMLParseErrorHandler
         ) {
         
         completionHandler = parseCompletionHandler
         errorHandler      = parseErrorHandler
-        parser            = NSXMLParser(data: dataToParse)
+        parser            = XMLParser(data: dataToParse)
         
         super.init()
         
@@ -126,9 +126,9 @@ class SimpleXMLParser: NSObject {
 // MARK: - NSXMLParserDelegate
 
 
-extension SimpleXMLParser: NSXMLParserDelegate {
+extension SimpleXMLParser: XMLParserDelegate {
     
-    func parserDidStartDocument(parser: NSXMLParser) {
+    func parserDidStartDocument(parser: XMLParser) {
         root = SimpleXMLNode(name: "xml")
         currentNode = root
     }
