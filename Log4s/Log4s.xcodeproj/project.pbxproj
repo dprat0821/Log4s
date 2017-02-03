@@ -9,16 +9,17 @@
 /* Begin PBXBuildFile section */
 		5C71095C1E43B5B80061937B /* IO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C71095B1E43B5B80061937B /* IO.swift */; };
 		5C71095E1E43B77D0061937B /* Error.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C71095D1E43B77D0061937B /* Error.swift */; };
-		5C7109621E43B7940061937B /* SimpleXMLNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C7109601E43B7940061937B /* SimpleXMLNode.swift */; };
-		5C7109631E43B7940061937B /* SimpleXMLParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C7109611E43B7940061937B /* SimpleXMLParser.swift */; };
 		5C7109671E43C4B90061937B /* IOXML.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C7109661E43C4B90061937B /* IOXML.swift */; };
 		5C7109691E43C4D20061937B /* IOJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C7109681E43C4D20061937B /* IOJSON.swift */; };
 		5C71096B1E43C8190061937B /* IOPlist.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C71096A1E43C8190061937B /* IOPlist.swift */; };
+		5C71096D1E44D10A0061937B /* Appender.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C71096C1E44D10A0061937B /* Appender.swift */; };
+		5C71096F1E44D13F0061937B /* Layout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C71096E1E44D13F0061937B /* Layout.swift */; };
+		5C8192581E452DC50088C021 /* LayoutBasic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C8192571E452DC50088C021 /* LayoutBasic.swift */; };
 		5CFE9C8E1E438F790066D821 /* Log4s.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5CFE9C841E438F790066D821 /* Log4s.framework */; };
 		5CFE9C931E438F790066D821 /* Log4sTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CFE9C921E438F790066D821 /* Log4sTests.swift */; };
 		5CFE9C951E438F790066D821 /* Log4s.h in Headers */ = {isa = PBXBuildFile; fileRef = 5CFE9C871E438F790066D821 /* Log4s.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		5CFE9CCC1E4397A80066D821 /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CFE9CCB1E4397A80066D821 /* Logger.swift */; };
-		5CFE9CCE1E439AD20066D821 /* Loggable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CFE9CCD1E439AD20066D821 /* Loggable.swift */; };
+		5CFE9CCE1E439AD20066D821 /* Event.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CFE9CCD1E439AD20066D821 /* Event.swift */; };
 		5CFE9CD01E439B010066D821 /* Consts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CFE9CCF1E439B010066D821 /* Consts.swift */; };
 /* End PBXBuildFile section */
 
@@ -35,11 +36,12 @@
 /* Begin PBXFileReference section */
 		5C71095B1E43B5B80061937B /* IO.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = IO.swift; path = Core/IO.swift; sourceTree = "<group>"; };
 		5C71095D1E43B77D0061937B /* Error.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Error.swift; path = Core/Error.swift; sourceTree = "<group>"; };
-		5C7109601E43B7940061937B /* SimpleXMLNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SimpleXMLNode.swift; path = IO/SimpleXMLNode.swift; sourceTree = "<group>"; };
-		5C7109611E43B7940061937B /* SimpleXMLParser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SimpleXMLParser.swift; path = IO/SimpleXMLParser.swift; sourceTree = "<group>"; };
 		5C7109661E43C4B90061937B /* IOXML.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = IOXML.swift; path = IO/IOXML.swift; sourceTree = "<group>"; };
 		5C7109681E43C4D20061937B /* IOJSON.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = IOJSON.swift; path = IO/IOJSON.swift; sourceTree = "<group>"; };
 		5C71096A1E43C8190061937B /* IOPlist.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = IOPlist.swift; path = IO/IOPlist.swift; sourceTree = "<group>"; };
+		5C71096C1E44D10A0061937B /* Appender.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Appender.swift; path = Core/Appender.swift; sourceTree = "<group>"; };
+		5C71096E1E44D13F0061937B /* Layout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Layout.swift; path = Core/Layout.swift; sourceTree = "<group>"; };
+		5C8192571E452DC50088C021 /* LayoutBasic.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LayoutBasic.swift; path = Layout/LayoutBasic.swift; sourceTree = "<group>"; };
 		5CFE9C841E438F790066D821 /* Log4s.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Log4s.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		5CFE9C871E438F790066D821 /* Log4s.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Log4s.h; sourceTree = "<group>"; };
 		5CFE9C881E438F790066D821 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -47,7 +49,7 @@
 		5CFE9C921E438F790066D821 /* Log4sTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Log4sTests.swift; sourceTree = "<group>"; };
 		5CFE9C941E438F790066D821 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		5CFE9CCB1E4397A80066D821 /* Logger.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Logger.swift; path = Core/Logger.swift; sourceTree = "<group>"; };
-		5CFE9CCD1E439AD20066D821 /* Loggable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Loggable.swift; path = Core/Loggable.swift; sourceTree = "<group>"; };
+		5CFE9CCD1E439AD20066D821 /* Event.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Event.swift; path = Core/Event.swift; sourceTree = "<group>"; };
 		5CFE9CCF1E439B010066D821 /* Consts.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Consts.swift; path = Core/Consts.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -74,12 +76,18 @@
 			isa = PBXGroup;
 			children = (
 				5C7109681E43C4D20061937B /* IOJSON.swift */,
-				5C7109601E43B7940061937B /* SimpleXMLNode.swift */,
-				5C7109611E43B7940061937B /* SimpleXMLParser.swift */,
 				5C7109661E43C4B90061937B /* IOXML.swift */,
 				5C71096A1E43C8190061937B /* IOPlist.swift */,
 			);
 			name = IO;
+			sourceTree = "<group>";
+		};
+		5C7109701E44E7880061937B /* Layout */ = {
+			isa = PBXGroup;
+			children = (
+				5C8192571E452DC50088C021 /* LayoutBasic.swift */,
+			);
+			name = Layout;
 			sourceTree = "<group>";
 		};
 		5CFE9C7A1E438F790066D821 = {
@@ -103,6 +111,7 @@
 		5CFE9C861E438F790066D821 /* Log4s */ = {
 			isa = PBXGroup;
 			children = (
+				5C7109701E44E7880061937B /* Layout */,
 				5C71095F1E43B7870061937B /* IO */,
 				5CFE9CCA1E43978F0066D821 /* Core */,
 				5CFE9C871E438F790066D821 /* Log4s.h */,
@@ -126,8 +135,10 @@
 				5C71095D1E43B77D0061937B /* Error.swift */,
 				5C71095B1E43B5B80061937B /* IO.swift */,
 				5CFE9CCB1E4397A80066D821 /* Logger.swift */,
-				5CFE9CCD1E439AD20066D821 /* Loggable.swift */,
+				5CFE9CCD1E439AD20066D821 /* Event.swift */,
 				5CFE9CCF1E439B010066D821 /* Consts.swift */,
+				5C71096C1E44D10A0061937B /* Appender.swift */,
+				5C71096E1E44D13F0061937B /* Layout.swift */,
 			);
 			name = Core;
 			sourceTree = "<group>";
@@ -245,14 +256,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				5CFE9CCE1E439AD20066D821 /* Loggable.swift in Sources */,
+				5CFE9CCE1E439AD20066D821 /* Event.swift in Sources */,
+				5C71096D1E44D10A0061937B /* Appender.swift in Sources */,
 				5C7109691E43C4D20061937B /* IOJSON.swift in Sources */,
 				5C71096B1E43C8190061937B /* IOPlist.swift in Sources */,
 				5C7109671E43C4B90061937B /* IOXML.swift in Sources */,
-				5C7109631E43B7940061937B /* SimpleXMLParser.swift in Sources */,
+				5C8192581E452DC50088C021 /* LayoutBasic.swift in Sources */,
+				5C71096F1E44D13F0061937B /* Layout.swift in Sources */,
 				5CFE9CD01E439B010066D821 /* Consts.swift in Sources */,
 				5C71095C1E43B5B80061937B /* IO.swift in Sources */,
-				5C7109621E43B7940061937B /* SimpleXMLNode.swift in Sources */,
 				5C71095E1E43B77D0061937B /* Error.swift in Sources */,
 				5CFE9CCC1E4397A80066D821 /* Logger.swift in Sources */,
 			);

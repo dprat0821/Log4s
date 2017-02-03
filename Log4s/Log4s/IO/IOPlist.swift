@@ -9,7 +9,7 @@
 import Foundation
 
 
-class PlistInputter: Inputting {
+class PlistInputter {
     func input(file name:String, completion:InputCompletion) throws {
         
         //Finish this method later...

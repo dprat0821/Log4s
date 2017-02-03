@@ -9,7 +9,7 @@
 import Foundation
 
 
-class XMLInputter: Inputting {
+class XMLInputter {
     func input(file name:String, completion:InputCompletion) throws {
         guard let path = Bundle.main.path(forResource: name, ofType: "xml") else {
             throw IOError.fileNotExists(path: name)
@@ -19,7 +19,7 @@ class XMLInputter: Inputting {
             throw IOError.failedToLoad(path: path)
         }
         do{
-            try input(data as Data, completion: completion)
+            //try input(data as Data, completion: completion)
         }catch{
             throw error
         }

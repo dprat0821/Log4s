@@ -2,9 +2,9 @@
 <Workspace
    version = "1.0">
    <FileRef
-      location = "group:SampleSwiftIOS/SampleSwiftIOS/SampleSwiftIOS.xcodeproj">
+      location = "group:Log4s/Log4s.xcodeproj">
    </FileRef>
    <FileRef
-      location = "group:Log4s/Log4s/Log4s.xcodeproj">
+      location = "group:SampleSwiftIOS/SampleSwiftIOS.xcodeproj">
    </FileRef>
 </Workspace>

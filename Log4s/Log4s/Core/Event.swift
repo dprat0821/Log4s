@@ -21,9 +21,15 @@ public class Loggable<IdType> {
         }
         self.payload?[key] = detail
     }
+    
+    public func copy() -> Loggable<IdType>{
+        let r = Loggable<IdType>(id)
+        r.payload = self.payload
+        return r
+    }
 }
 
-public class Event<IdType>: Loggable<Any>{
+public class Event: Loggable<UInt>{
     public var sev: Severity
     public var tags: [String]?
     public var message: String
@@ -31,17 +37,23 @@ public class Event<IdType>: Loggable<Any>{
     public var method: String
     public var line: UInt
     public var object: AnyObject?
-    public var timestamp: NSDate
+    public var timestamp: Date
     
-    init(id:UInt,sev:Severity, detail:UInt, tags:[String]?, message: String, file: String, method: String, line: UInt) {
+    init(id:UInt,sev:Severity, tags:[String]?, message: String, file: String, method: String, line: UInt) {
         self.sev = sev
         self.tags = tags
         self.message = message
         self.file = file
         self.method = method
         self.line = line
-        self.timestamp = NSDate()
+        self.timestamp = Date()
         super.init(id)
+    }
+    
+    override public func copy() -> Event {
+        let r = Event(id: id, sev: sev, tags: tags, message: message, file: file, method: method, line: line)
+        r.payload = payload
+        return r
     }
 }
 

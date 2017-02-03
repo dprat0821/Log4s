@@ -33,6 +33,11 @@ public class Logger{
         }
     }
     
+    public var maxSev = Severity.verbose
     
+    var appenders = [Appender]()
+    
+
+
 }
 

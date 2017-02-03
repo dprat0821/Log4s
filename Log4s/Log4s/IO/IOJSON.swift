@@ -9,7 +9,7 @@
 import Foundation
 
 
-class JSONInputter: Inputting {
+class JSONInputter {
     func input(file name:String, completion:InputCompletion) throws {
         
         //Finish this method later...
@@ -35,7 +35,7 @@ class JSONInputter: Inputting {
     }
 }
 
-class JSONOutputter: Outputting {
+class JSONOutputter {
     func outputString(source:IOValue,completion: (String)->()) throws{
         do{
             let jsonData = try JSONSerialization.data(withJSONObject: source, options: JSONSerialization.WritingOptions())
