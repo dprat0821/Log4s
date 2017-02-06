@@ -9,50 +9,79 @@
 import Foundation
 
 
-public typealias LayoutCompletion = (Event, Error?) -> Void
+public typealias LayoutCompletion = (String, Error?) -> Void
+
 
 open class Layout {
     
     public internal(set) var next: Layout?
     
-    func _modify(_ event:Event, completion: LayoutCompletion){
-        let out = modify(event)
+    internal func _present(_ event:Event, completion: LayoutCompletion){
+        let out = present(event)
         if let next = self.next{
-            next._modify(out, completion: completion)
+            next._present(event){(result, error) in
+                completion("\(out)\(result)",error)
+            }
         }
         else{
             completion(out, nil)
         }
     }
     
-    public func chain(layout:Layout) -> Layout{
-        self.next = layout
-        return layout
+    public func chain(_ layout:Layout) -> Layout{
+        var next: Layout? = self
+        while next?.next != nil {
+            next = next?.next
+        }
+        next?.next = layout
+        return self
     }
     
-    open func modify(_ event:Event) -> Event {
-        return event
+    public func chain(_ layouts:[Layout]) -> Layout{
+        var nowNode = self
+        while nowNode.next != nil {
+            nowNode = (next?.next)!
+        }
+        
+        for l in layouts{
+            nowNode.chain(l)
+            nowNode = l
+        }
+        return self
+    }
+    
+    
+    /**
+     override this method
+     */
+    open func present(_ event:Event) -> String {
+        return ""
     }
 }
 
+
 open class AsyncLayout : Layout {
-    final override func _modify(_ event:Event, completion: LayoutCompletion){
-        modify(event){ (result, error) in
+    override func _present(_ event:Event, completion: LayoutCompletion){
+        present(event){ (out, error) in
             if let error = error{
-                completion(result, error)
+                completion(out, error)
             }
             else{
                 if let next = self.next{
-                    next._modify(result, completion: completion)
+                    next._present(event){(result,errorNext) in
+                        completion("\(out)\(result)",errorNext)
+                    }
                 }
                 else{
-                    completion(result, nil)
+                    completion(out, nil)
                 }
             }
         }
     }
     
-    open func modify(_ event:Event, completion: LayoutCompletion) {
-        completion(event,nil)
+    open func present(_ event:Event, completion: LayoutCompletion) {
+        completion("",nil)
     }
 }
+
+

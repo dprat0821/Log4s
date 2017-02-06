@@ -22,7 +22,7 @@ public class Event{
     public var timestamp: Date
     var details: [String:AnyObject]?
     
-    init(id:UInt,sev:Severity, tags:[String]?, message: String, file: String, method: String, line: UInt) {
+    init(id:UInt,sev:Severity, tags:[String]? = nil, message: String, file: String, method: String, line: UInt) {
         self.id = id
         self.sev = sev
         self.tags = tags

@@ -110,13 +110,14 @@ open class Appender{
                     evtDumping = evtTuple
                     
                     if let layout = layout {    // Use the layout to modify event first
-                        layout._modify(evtTuple.evt){ (modifiedEvent, error) in
+                        layout._present(evtTuple.evt){ (modifiedMessage, error) in
                             if let error = error{   // There are errors while layouting
                                 evtTuple.cpl?(error)
                                 self._didLog(with: error)
                             }
                             else{
-                                self.dump(modifiedEvent){ (dumpError) in
+                                evtTuple.evt.message = modifiedMessage
+                                self.dump(evtTuple.evt){ (dumpError) in
                                     evtTuple.cpl?(dumpError)
                                     self._didLog(with:dumpError)
                                 }
