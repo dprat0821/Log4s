@@ -9,27 +9,9 @@
 import Foundation
 
 
-public class Loggable<IdType> {
-    var id: IdType
-    var payload: [String:AnyObject]?
-    init(_ id: IdType) {
-        self.id = id
-    }
-    public func add(_ detail: AnyObject, for key: String) {
-        if self.payload == nil {
-            self.payload = [String:AnyObject]()
-        }
-        self.payload?[key] = detail
-    }
-    
-    public func copy() -> Loggable<IdType>{
-        let r = Loggable<IdType>(id)
-        r.payload = self.payload
-        return r
-    }
-}
 
-public class Event: Loggable<UInt>{
+public class Event{
+    public var id: UInt
     public var sev: Severity
     public var tags: [String]?
     public var message: String
@@ -38,8 +20,10 @@ public class Event: Loggable<UInt>{
     public var line: UInt
     public var object: AnyObject?
     public var timestamp: Date
+    var details: [String:AnyObject]?
     
     init(id:UInt,sev:Severity, tags:[String]?, message: String, file: String, method: String, line: UInt) {
+        self.id = id
         self.sev = sev
         self.tags = tags
         self.message = message
@@ -47,13 +31,28 @@ public class Event: Loggable<UInt>{
         self.method = method
         self.line = line
         self.timestamp = Date()
-        super.init(id)
     }
     
-    override public func copy() -> Event {
+    public func copy() -> Event {
         let r = Event(id: id, sev: sev, tags: tags, message: message, file: file, method: method, line: line)
-        r.payload = payload
+        r.details = details
         return r
+    }
+    
+    public func add(_ detail: AnyObject, for key: String) {
+        if self.details == nil {
+            self.details = [String:AnyObject]()
+        }
+        self.details?[key] = detail
+    }
+    
+    public func detail(_ key: String) -> AnyObject? {
+        if let details = details{
+            return details[key]
+        }
+        else{
+            return nil
+        }
     }
 }
 

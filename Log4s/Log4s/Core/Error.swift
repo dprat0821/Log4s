@@ -16,5 +16,6 @@ extension NSError{
     }
 }
 
-//class Error {
-//}
+enum LoggingError: Error {
+    
+}

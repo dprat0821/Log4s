@@ -9,38 +9,50 @@
 import Foundation
 
 
-typealias LayoutCompletion = (Loggable<Any>) throws -> Void
+public typealias LayoutCompletion = (Event, Error?) -> Void
 
-public class Layout {
-    func _modify(loggable:Loggable<Any>, completion: @escaping LayoutCompletion ) throws{
-        do{
-            try modify(loggable: loggable){ (result) in
-                if let next = self.next {
-                    do {
-                        try next.modify(loggable: result){ (resultNext) in
-                            try completion(resultNext)
-                        }
-                    }
+open class Layout {
+    
+    public internal(set) var next: Layout?
+    
+    func _modify(_ event:Event, completion: LayoutCompletion){
+        let out = modify(event)
+        if let next = self.next{
+            next._modify(out, completion: completion)
+        }
+        else{
+            completion(out, nil)
+        }
+    }
+    
+    public func chain(layout:Layout) -> Layout{
+        self.next = layout
+        return layout
+    }
+    
+    open func modify(_ event:Event) -> Event {
+        return event
+    }
+}
+
+open class AsyncLayout : Layout {
+    final override func _modify(_ event:Event, completion: LayoutCompletion){
+        modify(event){ (result, error) in
+            if let error = error{
+                completion(result, error)
+            }
+            else{
+                if let next = self.next{
+                    next._modify(result, completion: completion)
                 }
                 else{
-                    try completion(loggable)
+                    completion(result, nil)
                 }
             }
-        }catch{
-            throw error
         }
-        
     }
     
-    //Rewrite this
-    func modify(loggable:Loggable<Any>, completion: @escaping LayoutCompletion ) throws {
-        do{
-            try completion(loggable)
-        }catch{
-            throw error
-        }
-        
+    open func modify(_ event:Event, completion: LayoutCompletion) {
+        completion(event,nil)
     }
-    
-    var next: Layout?
 }

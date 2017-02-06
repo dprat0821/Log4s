@@ -21,6 +21,8 @@
 		5CFE9CCC1E4397A80066D821 /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CFE9CCB1E4397A80066D821 /* Logger.swift */; };
 		5CFE9CCE1E439AD20066D821 /* Event.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CFE9CCD1E439AD20066D821 /* Event.swift */; };
 		5CFE9CD01E439B010066D821 /* Consts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CFE9CCF1E439B010066D821 /* Consts.swift */; };
+		AB1B3D431E45942900145CD1 /* LoggerBasicTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB1B3D421E45942900145CD1 /* LoggerBasicTests.swift */; };
+		AB1B3D451E463C0300145CD1 /* LayoutTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB1B3D441E463C0300145CD1 /* LayoutTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -51,6 +53,8 @@
 		5CFE9CCB1E4397A80066D821 /* Logger.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Logger.swift; path = Core/Logger.swift; sourceTree = "<group>"; };
 		5CFE9CCD1E439AD20066D821 /* Event.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Event.swift; path = Core/Event.swift; sourceTree = "<group>"; };
 		5CFE9CCF1E439B010066D821 /* Consts.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Consts.swift; path = Core/Consts.swift; sourceTree = "<group>"; };
+		AB1B3D421E45942900145CD1 /* LoggerBasicTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoggerBasicTests.swift; sourceTree = "<group>"; };
+		AB1B3D441E463C0300145CD1 /* LayoutTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LayoutTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -82,12 +86,12 @@
 			name = IO;
 			sourceTree = "<group>";
 		};
-		5C7109701E44E7880061937B /* Layout */ = {
+		5C7109701E44E7880061937B /* Layouts */ = {
 			isa = PBXGroup;
 			children = (
 				5C8192571E452DC50088C021 /* LayoutBasic.swift */,
 			);
-			name = Layout;
+			name = Layouts;
 			sourceTree = "<group>";
 		};
 		5CFE9C7A1E438F790066D821 = {
@@ -111,7 +115,8 @@
 		5CFE9C861E438F790066D821 /* Log4s */ = {
 			isa = PBXGroup;
 			children = (
-				5C7109701E44E7880061937B /* Layout */,
+				AB1B3D461E47BF8700145CD1 /* Appenders */,
+				5C7109701E44E7880061937B /* Layouts */,
 				5C71095F1E43B7870061937B /* IO */,
 				5CFE9CCA1E43978F0066D821 /* Core */,
 				5CFE9C871E438F790066D821 /* Log4s.h */,
@@ -123,6 +128,7 @@
 		5CFE9C911E438F790066D821 /* Log4sTests */ = {
 			isa = PBXGroup;
 			children = (
+				AB1B3D411E4593EB00145CD1 /* LoggerBasic */,
 				5CFE9C921E438F790066D821 /* Log4sTests.swift */,
 				5CFE9C941E438F790066D821 /* Info.plist */,
 			);
@@ -141,6 +147,22 @@
 				5C71096E1E44D13F0061937B /* Layout.swift */,
 			);
 			name = Core;
+			sourceTree = "<group>";
+		};
+		AB1B3D411E4593EB00145CD1 /* LoggerBasic */ = {
+			isa = PBXGroup;
+			children = (
+				AB1B3D421E45942900145CD1 /* LoggerBasicTests.swift */,
+				AB1B3D441E463C0300145CD1 /* LayoutTests.swift */,
+			);
+			name = LoggerBasic;
+			sourceTree = "<group>";
+		};
+		AB1B3D461E47BF8700145CD1 /* Appenders */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Appenders;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -274,7 +296,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AB1B3D431E45942900145CD1 /* LoggerBasicTests.swift in Sources */,
 				5CFE9C931E438F790066D821 /* Log4sTests.swift in Sources */,
+				AB1B3D451E463C0300145CD1 /* LayoutTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -400,7 +424,9 @@
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				INFOPLIST_FILE = Log4s/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = com.geekmouse.Log4s;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
@@ -421,6 +447,7 @@
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				INFOPLIST_FILE = Log4s/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.geekmouse.Log4s;
 				PRODUCT_NAME = "$(TARGET_NAME)";

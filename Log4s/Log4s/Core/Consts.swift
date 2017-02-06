@@ -19,3 +19,5 @@ public enum Severity: Int {
     case verbose = 600
     
 }
+
+public typealias Tag = String
