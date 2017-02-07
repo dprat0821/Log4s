@@ -28,25 +28,36 @@ open class Layout {
         }
     }
     
-    public func chain(_ layout:Layout) -> Layout{
-        var next: Layout? = self
-        while next?.next != nil {
-            next = next?.next
+    public func last()-> Layout {
+        var nodeNow = self
+        while true {
+            if let next = nodeNow.next{
+                nodeNow = next
+            }
+            else{
+                break
+            }
         }
-        next?.next = layout
+        return nodeNow
+    }
+    
+    public func chain(_ layout:Layout) -> Layout{
+        last().next = layout
         return self
     }
     
     public func chain(_ layouts:[Layout]) -> Layout{
-        var nowNode = self
-        while nowNode.next != nil {
-            nowNode = (next?.next)!
-        }
+        var nowNode = last()
         
         for l in layouts{
             nowNode.chain(l)
-            nowNode = l
+            nowNode = l.last()
         }
+        return self
+    }
+    
+    public func resetChain() -> Layout{
+        next = nil
         return self
     }
     

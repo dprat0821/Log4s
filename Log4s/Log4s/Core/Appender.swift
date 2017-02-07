@@ -16,7 +16,7 @@ let nameSetSeverity = Notification.Name(rawValue: "severity")
 public protocol AppenderListener {
     func on(appender: Appender, logged event: Event, with error: Error?)
     func on(appender: Appender, changeSevertiy: (from: Severity, to: Severity))
-    func on(appender: Appender, changeLayout: (from: Layout?,to:Layout?))
+    func on(appender: Appender, changedTo layout: Layout)
 }
 
 /**
@@ -25,11 +25,7 @@ public protocol AppenderListener {
  */
 open class Appender{
 
-    public var layout: Layout? {
-        willSet{
-            listener?.on(appender: self, changeLayout: (from:layout,to:newValue))
-        }
-    }
+    public private(set) var layout = Layout()
     
     
     public var listener: AppenderListener?
@@ -63,7 +59,27 @@ open class Appender{
     private(set) var evtDumping: (evt: Event,cpl:DumpCompletion?)?
     
     
+    //
+    //  MARK: Layouts
+    //
     
+    public func add(layout:Layout) -> Appender {
+        return self.add(layouts: [layout])
+    }
+    
+    public func add(layouts: [Layout]) -> Appender {
+        self.layout = self.layout.last().chain(layouts)
+        listener?.on(appender: self, changedTo: self.layout)
+        return self
+    }
+    
+    public func resetLayout(){
+        self.layout.resetChain()
+    }
+    
+    //
+    //  MARK: Dumping
+    //
     
     internal func _dump(_ event: Event, completion: DumpCompletion? = nil) {
         var bValid = false
@@ -90,7 +106,7 @@ open class Appender{
     
     
     
-    private func _didLog(with error:Error? = nil){
+    private func _didDump(with error:Error? = nil){
         if let evtTuple = evtDumping{
             evtDumping = nil
             if let l = listener{
@@ -98,8 +114,8 @@ open class Appender{
             }
             _dequeue()
         }
-        
     }
+    
     
     private func _dequeue(){
         if evtDumping == nil {
@@ -113,13 +129,13 @@ open class Appender{
                         layout._present(evtTuple.evt){ (modifiedMessage, error) in
                             if let error = error{   // There are errors while layouting
                                 evtTuple.cpl?(error)
-                                self._didLog(with: error)
+                                self._didDump(with: error)
                             }
                             else{
                                 evtTuple.evt.message = modifiedMessage
                                 self.dump(evtTuple.evt){ (dumpError) in
                                     evtTuple.cpl?(dumpError)
-                                    self._didLog(with:dumpError)
+                                    self._didDump(with:dumpError)
                                 }
                             }
                         }
@@ -127,7 +143,7 @@ open class Appender{
                     else{   // w/o layout assigned, use the original event
                         self.dump(evtTuple.evt){ (dumpError) in
                             evtTuple.cpl?(dumpError)
-                            self._didLog(with: dumpError)
+                            self._didDump(with: dumpError)
                         }
                     }
                 }
