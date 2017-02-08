@@ -14,7 +14,11 @@
 		5C71096B1E43C8190061937B /* IOPlist.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C71096A1E43C8190061937B /* IOPlist.swift */; };
 		5C71096D1E44D10A0061937B /* Appender.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C71096C1E44D10A0061937B /* Appender.swift */; };
 		5C71096F1E44D13F0061937B /* Layout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C71096E1E44D13F0061937B /* Layout.swift */; };
-		5C8192581E452DC50088C021 /* LayoutBasic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C8192571E452DC50088C021 /* LayoutBasic.swift */; };
+		5C717C741E4BB54B00675AA9 /* LayoutDelimiter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C717C731E4BB54B00675AA9 /* LayoutDelimiter.swift */; };
+		5C717C761E4BB60700675AA9 /* LayoutTestComponents.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C717C751E4BB60700675AA9 /* LayoutTestComponents.swift */; };
+		5C717C781E4BB62D00675AA9 /* LayoutTestDelimiters.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C717C771E4BB62D00675AA9 /* LayoutTestDelimiters.swift */; };
+		5C717C7B1E4BB78B00675AA9 /* Concurrency.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C717C7A1E4BB78B00675AA9 /* Concurrency.swift */; };
+		5C8192581E452DC50088C021 /* LayoutComponents.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C8192571E452DC50088C021 /* LayoutComponents.swift */; };
 		5CFE9C8E1E438F790066D821 /* Log4s.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5CFE9C841E438F790066D821 /* Log4s.framework */; };
 		5CFE9C931E438F790066D821 /* Log4sTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CFE9C921E438F790066D821 /* Log4sTests.swift */; };
 		5CFE9C951E438F790066D821 /* Log4s.h in Headers */ = {isa = PBXBuildFile; fileRef = 5CFE9C871E438F790066D821 /* Log4s.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -22,7 +26,6 @@
 		5CFE9CCE1E439AD20066D821 /* Event.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CFE9CCD1E439AD20066D821 /* Event.swift */; };
 		5CFE9CD01E439B010066D821 /* Consts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CFE9CCF1E439B010066D821 /* Consts.swift */; };
 		AB1B3D431E45942900145CD1 /* LoggerBasicTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB1B3D421E45942900145CD1 /* LoggerBasicTests.swift */; };
-		AB1B3D451E463C0300145CD1 /* LayoutTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB1B3D441E463C0300145CD1 /* LayoutTests.swift */; };
 		ABDC0A271E4AEC550020469A /* AppenderBasicTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABDC0A261E4AEC550020469A /* AppenderBasicTests.swift */; };
 /* End PBXBuildFile section */
 
@@ -44,7 +47,11 @@
 		5C71096A1E43C8190061937B /* IOPlist.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = IOPlist.swift; path = IO/IOPlist.swift; sourceTree = "<group>"; };
 		5C71096C1E44D10A0061937B /* Appender.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Appender.swift; path = Core/Appender.swift; sourceTree = "<group>"; };
 		5C71096E1E44D13F0061937B /* Layout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Layout.swift; path = Core/Layout.swift; sourceTree = "<group>"; };
-		5C8192571E452DC50088C021 /* LayoutBasic.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LayoutBasic.swift; path = Layout/LayoutBasic.swift; sourceTree = "<group>"; };
+		5C717C731E4BB54B00675AA9 /* LayoutDelimiter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LayoutDelimiter.swift; path = Layout/LayoutDelimiter.swift; sourceTree = "<group>"; };
+		5C717C751E4BB60700675AA9 /* LayoutTestComponents.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LayoutTestComponents.swift; path = Layouts/LayoutTestComponents.swift; sourceTree = "<group>"; };
+		5C717C771E4BB62D00675AA9 /* LayoutTestDelimiters.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LayoutTestDelimiters.swift; path = Layouts/LayoutTestDelimiters.swift; sourceTree = "<group>"; };
+		5C717C7A1E4BB78B00675AA9 /* Concurrency.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Concurrency.swift; path = Utils/Concurrency.swift; sourceTree = "<group>"; };
+		5C8192571E452DC50088C021 /* LayoutComponents.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LayoutComponents.swift; path = Layout/LayoutComponents.swift; sourceTree = "<group>"; };
 		5CFE9C841E438F790066D821 /* Log4s.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Log4s.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		5CFE9C871E438F790066D821 /* Log4s.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Log4s.h; sourceTree = "<group>"; };
 		5CFE9C881E438F790066D821 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -55,7 +62,6 @@
 		5CFE9CCD1E439AD20066D821 /* Event.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Event.swift; path = Core/Event.swift; sourceTree = "<group>"; };
 		5CFE9CCF1E439B010066D821 /* Consts.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Consts.swift; path = Core/Consts.swift; sourceTree = "<group>"; };
 		AB1B3D421E45942900145CD1 /* LoggerBasicTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoggerBasicTests.swift; sourceTree = "<group>"; };
-		AB1B3D441E463C0300145CD1 /* LayoutTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LayoutTests.swift; sourceTree = "<group>"; };
 		ABDC0A261E4AEC550020469A /* AppenderBasicTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppenderBasicTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -91,9 +97,27 @@
 		5C7109701E44E7880061937B /* Layouts */ = {
 			isa = PBXGroup;
 			children = (
-				5C8192571E452DC50088C021 /* LayoutBasic.swift */,
+				5C8192571E452DC50088C021 /* LayoutComponents.swift */,
+				5C717C731E4BB54B00675AA9 /* LayoutDelimiter.swift */,
 			);
 			name = Layouts;
+			sourceTree = "<group>";
+		};
+		5C717C721E4BB51F00675AA9 /* Layouts */ = {
+			isa = PBXGroup;
+			children = (
+				5C717C771E4BB62D00675AA9 /* LayoutTestDelimiters.swift */,
+				5C717C751E4BB60700675AA9 /* LayoutTestComponents.swift */,
+			);
+			name = Layouts;
+			sourceTree = "<group>";
+		};
+		5C717C791E4BB75400675AA9 /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				5C717C7A1E4BB78B00675AA9 /* Concurrency.swift */,
+			);
+			name = Utils;
 			sourceTree = "<group>";
 		};
 		5CFE9C7A1E438F790066D821 = {
@@ -117,6 +141,7 @@
 		5CFE9C861E438F790066D821 /* Log4s */ = {
 			isa = PBXGroup;
 			children = (
+				5C717C791E4BB75400675AA9 /* Utils */,
 				AB1B3D461E47BF8700145CD1 /* Appenders */,
 				5C7109701E44E7880061937B /* Layouts */,
 				5C71095F1E43B7870061937B /* IO */,
@@ -130,6 +155,7 @@
 		5CFE9C911E438F790066D821 /* Log4sTests */ = {
 			isa = PBXGroup;
 			children = (
+				5C717C721E4BB51F00675AA9 /* Layouts */,
 				AB1B3D411E4593EB00145CD1 /* LoggerBasic */,
 				5CFE9C921E438F790066D821 /* Log4sTests.swift */,
 				5CFE9C941E438F790066D821 /* Info.plist */,
@@ -155,7 +181,6 @@
 			isa = PBXGroup;
 			children = (
 				AB1B3D421E45942900145CD1 /* LoggerBasicTests.swift */,
-				AB1B3D441E463C0300145CD1 /* LayoutTests.swift */,
 				ABDC0A261E4AEC550020469A /* AppenderBasicTests.swift */,
 			);
 			name = LoggerBasic;
@@ -286,7 +311,9 @@
 				5C7109691E43C4D20061937B /* IOJSON.swift in Sources */,
 				5C71096B1E43C8190061937B /* IOPlist.swift in Sources */,
 				5C7109671E43C4B90061937B /* IOXML.swift in Sources */,
-				5C8192581E452DC50088C021 /* LayoutBasic.swift in Sources */,
+				5C717C741E4BB54B00675AA9 /* LayoutDelimiter.swift in Sources */,
+				5C8192581E452DC50088C021 /* LayoutComponents.swift in Sources */,
+				5C717C7B1E4BB78B00675AA9 /* Concurrency.swift in Sources */,
 				5C71096F1E44D13F0061937B /* Layout.swift in Sources */,
 				5CFE9CD01E439B010066D821 /* Consts.swift in Sources */,
 				5C71095C1E43B5B80061937B /* IO.swift in Sources */,
@@ -299,10 +326,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5C717C761E4BB60700675AA9 /* LayoutTestComponents.swift in Sources */,
 				ABDC0A271E4AEC550020469A /* AppenderBasicTests.swift in Sources */,
 				AB1B3D431E45942900145CD1 /* LoggerBasicTests.swift in Sources */,
+				5C717C781E4BB62D00675AA9 /* LayoutTestDelimiters.swift in Sources */,
 				5CFE9C931E438F790066D821 /* Log4sTests.swift in Sources */,
-				AB1B3D451E463C0300145CD1 /* LayoutTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

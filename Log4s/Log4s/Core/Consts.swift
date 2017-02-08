@@ -21,3 +21,22 @@ public enum Severity: Int {
 }
 
 public typealias Tag = String
+
+public enum Case {
+    case upper
+    case lower
+    case normal
+}
+
+extension String{
+    func to(_ letterCase: Case) -> String {
+        switch letterCase {
+        case .upper:
+            return uppercased()
+        case .lower:
+            return lowercased()
+        case .normal:
+            return self
+        }
+    }
+}

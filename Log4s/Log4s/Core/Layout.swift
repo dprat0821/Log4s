@@ -16,7 +16,7 @@ open class Layout {
     
     public internal(set) var next: Layout?
     
-    internal func _present(_ event:Event, completion: LayoutCompletion){
+    internal func _present(_ event:Event, completion: @escaping LayoutCompletion){
         let out = present(event)
         if let next = self.next{
             next._present(event){(result, error) in
@@ -28,7 +28,7 @@ open class Layout {
         }
     }
     
-    public func last()-> Layout {
+    func last()-> Layout {
         var nodeNow = self
         while true {
             if let next = nodeNow.next{
@@ -41,17 +41,18 @@ open class Layout {
         return nodeNow
     }
     
-    public func chain(_ layout:Layout) -> Layout{
-        last().next = layout
+    @discardableResult public func chain(_ layout:Layout) -> Layout{
+        let last = self.last()
+        last.next = layout
         return self
     }
     
-    public func chain(_ layouts:[Layout]) -> Layout{
-        var nowNode = last()
+    @discardableResult public func chain(_ layouts:[Layout]) -> Layout{
+        var nowNode = self
         
         for l in layouts{
             nowNode.chain(l)
-            nowNode = l.last()
+            nowNode = l
         }
         return self
     }
@@ -72,7 +73,7 @@ open class Layout {
 
 
 open class AsyncLayout : Layout {
-    override func _present(_ event:Event, completion: LayoutCompletion){
+    override func _present(_ event:Event, completion: @escaping LayoutCompletion){
         present(event){ (out, error) in
             if let error = error{
                 completion(out, error)
@@ -90,7 +91,7 @@ open class AsyncLayout : Layout {
         }
     }
     
-    open func present(_ event:Event, completion: LayoutCompletion) {
+    open func present(_ event:Event, completion: @escaping LayoutCompletion) {
         completion("",nil)
     }
 }

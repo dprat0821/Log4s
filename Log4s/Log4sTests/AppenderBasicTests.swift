@@ -36,22 +36,24 @@ class AppenderBasicTests: XCTestCase {
     func testDefaultLayout() {
         //Use default
         let appender = Appender()
-        let evt = Event(id:0,sev:.fatal, message: "TestLog" , file:#file, method:#function, line: #line)
-        appender.dump(evt)
+        let evt = Event(id:0,sev:.fatal,message: "TestLog" , file:#file, method:#function, line: #line)
+        appender._dump(evt)
         
         // Assign new Layout
         appender.add(layout: LayoutTime())
-        appender.dump(evt)
+        appender._dump(evt)
         
         // Assign multiple layout
         appender
             .add(layout: delimiter.tab())
             .add(layout: delimiter.custom("["))
-            .add(layout: severtiy())
+            .add(layout: severtiy().to(Case.upper))
             .add(layout: delimiter.custom("]"))
             .add(layout: delimiter.tab())
-            .add(layout: message())
-        appender.dump(evt)
+            .add(layout: message(Case.upper))
+        appender._dump(evt)
+        
+        
     }
     
 }
