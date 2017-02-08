@@ -23,6 +23,7 @@
 		5CFE9CD01E439B010066D821 /* Consts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CFE9CCF1E439B010066D821 /* Consts.swift */; };
 		AB1B3D431E45942900145CD1 /* LoggerBasicTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB1B3D421E45942900145CD1 /* LoggerBasicTests.swift */; };
 		AB1B3D451E463C0300145CD1 /* LayoutTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB1B3D441E463C0300145CD1 /* LayoutTests.swift */; };
+		ABDC0A271E4AEC550020469A /* AppenderBasicTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABDC0A261E4AEC550020469A /* AppenderBasicTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -55,6 +56,7 @@
 		5CFE9CCF1E439B010066D821 /* Consts.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Consts.swift; path = Core/Consts.swift; sourceTree = "<group>"; };
 		AB1B3D421E45942900145CD1 /* LoggerBasicTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoggerBasicTests.swift; sourceTree = "<group>"; };
 		AB1B3D441E463C0300145CD1 /* LayoutTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LayoutTests.swift; sourceTree = "<group>"; };
+		ABDC0A261E4AEC550020469A /* AppenderBasicTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppenderBasicTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -154,6 +156,7 @@
 			children = (
 				AB1B3D421E45942900145CD1 /* LoggerBasicTests.swift */,
 				AB1B3D441E463C0300145CD1 /* LayoutTests.swift */,
+				ABDC0A261E4AEC550020469A /* AppenderBasicTests.swift */,
 			);
 			name = LoggerBasic;
 			sourceTree = "<group>";
@@ -296,6 +299,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				ABDC0A271E4AEC550020469A /* AppenderBasicTests.swift in Sources */,
 				AB1B3D431E45942900145CD1 /* LoggerBasicTests.swift in Sources */,
 				5CFE9C931E438F790066D821 /* Log4sTests.swift in Sources */,
 				AB1B3D451E463C0300145CD1 /* LayoutTests.swift in Sources */,

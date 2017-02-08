@@ -25,8 +25,15 @@ public protocol AppenderListener {
  */
 open class Appender{
 
-    public private(set) var layout = Layout()
+    public private(set) var layout: Layout = Layout().chain(LayoutMessage())
+    public private(set) var isUseDefaultConfig:Bool = true
     
+    public func useDefaultConfig(){
+        if !isUseDefaultConfig{
+            isUseDefaultConfig = true
+            self.layout = Layout().chain(LayoutMessage())
+        }
+    }
     
     public var listener: AppenderListener?
     
@@ -68,14 +75,16 @@ open class Appender{
     }
     
     public func add(layouts: [Layout]) -> Appender {
+        if isUseDefaultConfig{
+            self.layout = Layout()
+            isUseDefaultConfig = false
+        }
+        
         self.layout = self.layout.last().chain(layouts)
         listener?.on(appender: self, changedTo: self.layout)
         return self
     }
     
-    public func resetLayout(){
-        self.layout.resetChain()
-    }
     
     //
     //  MARK: Dumping
@@ -125,27 +134,30 @@ open class Appender{
                     evtTuple = (evt: evtTuple.evt.copy(),cpl: evtTuple.cpl)
                     evtDumping = evtTuple
                     
-                    if let layout = layout {    // Use the layout to modify event first
-                        layout._present(evtTuple.evt){ (modifiedMessage, error) in
-                            if let error = error{   // There are errors while layouting
-                                evtTuple.cpl?(error)
-                                self._didDump(with: error)
-                            }
-                            else{
-                                evtTuple.evt.message = modifiedMessage
-                                self.dump(evtTuple.evt){ (dumpError) in
-                                    evtTuple.cpl?(dumpError)
-                                    self._didDump(with:dumpError)
-                                }
+                    layout._present(evtTuple.evt){ (modifiedMessage, error) in
+                        if let error = error{   // There are errors while layouting
+                            evtTuple.cpl?(error)
+                            self._didDump(with: error)
+                        }
+                        else{
+                            evtTuple.evt.message = modifiedMessage
+                            self.dump(evtTuple.evt){ (dumpError) in
+                                evtTuple.cpl?(dumpError)
+                                self._didDump(with:dumpError)
                             }
                         }
                     }
-                    else{   // w/o layout assigned, use the original event
-                        self.dump(evtTuple.evt){ (dumpError) in
-                            evtTuple.cpl?(dumpError)
-                            self._didDump(with: dumpError)
-                        }
-                    }
+                    
+//                    
+//                    if let layout = layout {    // Use the layout to modify event first
+//                        
+//                    }
+//                    else{   // w/o layout assigned, use the original event
+//                        self.dump(evtTuple.evt){ (dumpError) in
+//                            evtTuple.cpl?(dumpError)
+//                            self._didDump(with: dumpError)
+//                        }
+//                    }
                 }
                 else{
                     evtQueue.removeFirst()
@@ -166,7 +178,7 @@ open class Appender{
      
      */
     open func dump(_ event: Event, completion: DumpCompletion? = nil){
-        self.dump(event)
+        print(event.message)
         completion?(nil)
     }
     

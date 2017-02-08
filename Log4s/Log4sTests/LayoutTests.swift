@@ -99,4 +99,5 @@ class LayoutTests: XCTestCase {
             XCTAssert( res == "\(timePrefix)\tFATAL\n    TESTLOG" )
         }
     }
+    
 }
