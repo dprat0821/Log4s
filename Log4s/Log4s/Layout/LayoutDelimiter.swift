@@ -14,7 +14,7 @@ import Foundation
 //
 
 public typealias delimiter = LayoutDelimiter
-public enum TypeLayoutDelimiter{
+public enum Delimiter{
     case space
     case spaces(Int)
     case pipe
@@ -80,86 +80,4 @@ public class LayoutDelimiter: Layout {
 }
 
 
-//
-// MARK: LayoutBrackets
-//
-
-typealias brackets = LayoutBrackets
-public class LayoutBrackets: Layout {
-    public var leftBracket: String
-    public var rightBracket: String
-    public var embedLayout: Layout?
-    public var isEliminateWhenEmpty = false
-    
-    init(_ symbol: String = "[") {
-        if symbol == "["{
-            leftBracket = "["
-            rightBracket = "]"
-        }else if symbol == "{"{
-            leftBracket = "{"
-            rightBracket = "}"
-        }else if symbol == "("{
-            leftBracket = "("
-            rightBracket = ")"
-        }else if symbol == "<"{
-            leftBracket = "<"
-            rightBracket = ">"
-        }
-        else{
-            leftBracket = symbol
-            rightBracket = symbol
-        }
-    }
-    
-    init(left: String, right: String) {
-        leftBracket = left
-        rightBracket = right
-    }
-    
-    @discardableResult public func eliminateWhenEmpty() -> Layout{
-        isEliminateWhenEmpty = true
-        return self
-    }
-    
-    @discardableResult public func embed(_ layout: Layout) -> Layout {
-        self.embedLayout = layout
-        return self
-    }
-    
-    override public func _present(_ event: Event, completion: @escaping LayoutCompletion) {
-        if let embedLayout = self.embedLayout {
-            embedLayout._present(event){ (result, error) in
-                if let error = error{
-                    completion(result, error)
-                }
-                else{
-                    if self.isEliminateWhenEmpty && result == ""{
-                        if let next = self.next {
-                            next._present(event){ (resultNext, errorNext) in
-                                completion( resultNext, error)
-                            }
-                        }
-                        else{
-                            completion("", nil)
-                        }
-                        
-                    }
-                    else{
-                        completion( "\(self.leftBracket)\(result)\(self.rightBracket)", error)
-                    }
-                }
-                
-                
-            }
-        }
-        else{
-            if self.isEliminateWhenEmpty{
-                completion("", nil)
-            }
-            else{
-                completion( "\(self.leftBracket)\(self.rightBracket)", nil)
-            }
-        }
-    }
-}
 

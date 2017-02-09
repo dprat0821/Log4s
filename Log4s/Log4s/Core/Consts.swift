@@ -29,7 +29,7 @@ public enum Case {
 }
 
 extension String{
-    func to(_ letterCase: Case) -> String {
+    func use(_ letterCase: Case) -> String {
         switch letterCase {
         case .upper:
             return uppercased()

@@ -27,6 +27,9 @@
 		5CFE9CD01E439B010066D821 /* Consts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CFE9CCF1E439B010066D821 /* Consts.swift */; };
 		AB1B3D431E45942900145CD1 /* LoggerBasicTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB1B3D421E45942900145CD1 /* LoggerBasicTests.swift */; };
 		ABDC0A271E4AEC550020469A /* AppenderBasicTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABDC0A261E4AEC550020469A /* AppenderBasicTests.swift */; };
+		ABDC0A291E4C0BA10020469A /* LayoutBrackets.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABDC0A281E4C0BA10020469A /* LayoutBrackets.swift */; };
+		ABDC0A2B1E4C0ED40020469A /* LayoutTestChains.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABDC0A2A1E4C0ED40020469A /* LayoutTestChains.swift */; };
+		ABDC0A2D1E4C0EE90020469A /* LayoutTestBrackets.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABDC0A2C1E4C0EE90020469A /* LayoutTestBrackets.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -63,6 +66,9 @@
 		5CFE9CCF1E439B010066D821 /* Consts.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Consts.swift; path = Core/Consts.swift; sourceTree = "<group>"; };
 		AB1B3D421E45942900145CD1 /* LoggerBasicTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoggerBasicTests.swift; sourceTree = "<group>"; };
 		ABDC0A261E4AEC550020469A /* AppenderBasicTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppenderBasicTests.swift; sourceTree = "<group>"; };
+		ABDC0A281E4C0BA10020469A /* LayoutBrackets.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LayoutBrackets.swift; path = Layout/LayoutBrackets.swift; sourceTree = "<group>"; };
+		ABDC0A2A1E4C0ED40020469A /* LayoutTestChains.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LayoutTestChains.swift; path = Layouts/LayoutTestChains.swift; sourceTree = "<group>"; };
+		ABDC0A2C1E4C0EE90020469A /* LayoutTestBrackets.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LayoutTestBrackets.swift; path = Layouts/LayoutTestBrackets.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -99,6 +105,7 @@
 			children = (
 				5C8192571E452DC50088C021 /* LayoutComponents.swift */,
 				5C717C731E4BB54B00675AA9 /* LayoutDelimiter.swift */,
+				ABDC0A281E4C0BA10020469A /* LayoutBrackets.swift */,
 			);
 			name = Layouts;
 			sourceTree = "<group>";
@@ -108,6 +115,8 @@
 			children = (
 				5C717C771E4BB62D00675AA9 /* LayoutTestDelimiters.swift */,
 				5C717C751E4BB60700675AA9 /* LayoutTestComponents.swift */,
+				ABDC0A2A1E4C0ED40020469A /* LayoutTestChains.swift */,
+				ABDC0A2C1E4C0EE90020469A /* LayoutTestBrackets.swift */,
 			);
 			name = Layouts;
 			sourceTree = "<group>";
@@ -316,6 +325,7 @@
 				5C717C7B1E4BB78B00675AA9 /* Concurrency.swift in Sources */,
 				5C71096F1E44D13F0061937B /* Layout.swift in Sources */,
 				5CFE9CD01E439B010066D821 /* Consts.swift in Sources */,
+				ABDC0A291E4C0BA10020469A /* LayoutBrackets.swift in Sources */,
 				5C71095C1E43B5B80061937B /* IO.swift in Sources */,
 				5C71095E1E43B77D0061937B /* Error.swift in Sources */,
 				5CFE9CCC1E4397A80066D821 /* Logger.swift in Sources */,
@@ -327,7 +337,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				5C717C761E4BB60700675AA9 /* LayoutTestComponents.swift in Sources */,
+				ABDC0A2B1E4C0ED40020469A /* LayoutTestChains.swift in Sources */,
 				ABDC0A271E4AEC550020469A /* AppenderBasicTests.swift in Sources */,
+				ABDC0A2D1E4C0EE90020469A /* LayoutTestBrackets.swift in Sources */,
 				AB1B3D431E45942900145CD1 /* LoggerBasicTests.swift in Sources */,
 				5C717C781E4BB62D00675AA9 /* LayoutTestDelimiters.swift in Sources */,
 				5CFE9C931E438F790066D821 /* Log4sTests.swift in Sources */,

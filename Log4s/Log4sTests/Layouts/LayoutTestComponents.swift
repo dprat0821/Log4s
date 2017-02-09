@@ -22,11 +22,6 @@ class LayoutTestComponents: XCTestCase {
         super.tearDown()
     }
     
-    func testExample() {
-        // This is an example of a functional test case.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
-    }
-    
     func testPerformanceExample() {
         // This is an example of a performance test case.
         self.measure {
@@ -53,20 +48,7 @@ class LayoutTestComponents: XCTestCase {
         print(layout3.present(evt))
     }
     
-    func testLayoutTags() {
-        // No tag
-        let evt = Event(id:0,sev:.fatal,message: "TestLog" , file:#file, method:#function, line: #line)
-        Layout().chain([
-            delimiter.custom("["),
-            tags(),
-            delimiter.custom("]"),
-            delimiter.tab(),
-            message()
-            ])._present(evt){ (res, error) in
-                print(res)
-                XCTAssert( res == "[]\tTestLog" )
-        }
-        
+    func testLayoutTagsBasic()  {
         //One Tag
         let evt1 = Event(id:0,sev:.fatal, tags: ["Tag1"],message: "TestLog" , file:#file, method:#function, line: #line)
         Layout().chain([
@@ -83,7 +65,7 @@ class LayoutTestComponents: XCTestCase {
         //Tag with uppercase
         Layout().chain([
             delimiter.custom("["),
-            tags().to(.upper),
+            tags().use(.upper),
             delimiter.custom("]"),
             delimiter.tab(),
             message()
@@ -91,7 +73,9 @@ class LayoutTestComponents: XCTestCase {
                 print(res)
                 XCTAssert( res == "[TAG1]\tTestLog" )
         }
-        
+    }
+    
+    func testLayoutTagsMutipleTags() {
         let evt2 = Event(id:0,sev:.fatal, tags: ["Tag1","Tag2","Tag3"],message: "TestLog" , file:#file, method:#function, line: #line)
         
         //Mutiple tags
@@ -119,8 +103,29 @@ class LayoutTestComponents: XCTestCase {
         }
     }
     
+    func testLayoutTagsWithoutTag() {
+        // No tag
+        let evt = Event(id:0,sev:.fatal,message: "TestLog" , file:#file, method:#function, line: #line)
+        Layout().chain([
+            delimiter.custom("["),
+            tags(),
+            delimiter.custom("]"),
+            delimiter.tab(),
+            message()
+            ])._present(evt){ (res, error) in
+                print(res)
+                XCTAssert( res == "[]\tTestLog" )
+        }
+    }
+    
+    
+    
     func testLayoutMessage()  {
         let evt = Event(id:0,sev:.warn, message: "TestLog" , file:#file, method:#function, line: #line)
+        LayoutMessage(.lower)._present(evt){ (res, error) in
+            print(res)
+            XCTAssert( res == "testlog" )
+        }
         
     }
 }

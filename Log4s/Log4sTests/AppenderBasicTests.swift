@@ -21,10 +21,6 @@ class AppenderBasicTests: XCTestCase {
         super.tearDown()
     }
     
-    func testExample() {
-        // This is an example of a functional test case.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
-    }
     
     func testPerformanceExample() {
         // This is an example of a performance test case.
@@ -47,7 +43,7 @@ class AppenderBasicTests: XCTestCase {
         appender
             .add(layout: delimiter.tab())
             .add(layout: delimiter.custom("["))
-            .add(layout: severtiy().to(Case.upper))
+            .add(layout: severtiy().use(Case.upper))
             .add(layout: delimiter.custom("]"))
             .add(layout: delimiter.tab())
             .add(layout: message(Case.upper))

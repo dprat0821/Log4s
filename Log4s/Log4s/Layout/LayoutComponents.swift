@@ -10,6 +10,16 @@ import Foundation
 
 
 //
+// MARK: LayoutId
+//
+public typealias id = LayoutId
+public class LayoutId:Layout {
+    override public func present(_ event:Event) -> String {
+        return String(event.id)
+    }
+}
+
+//
 // MARK: LayoutTime
 //
 
@@ -28,6 +38,8 @@ public class LayoutTime: Layout {
 }
 
 
+
+
 //
 // MARK: LayoutSeverity
 //
@@ -35,12 +47,12 @@ public typealias severtiy = LayoutSeverity
 public class LayoutSeverity: Layout {
     public var letterCase: Case
     override public func present(_ event:Event) -> String {
-        return String(describing: event.sev).to(letterCase)
+        return String(describing: event.sev).use(letterCase)
     }
-    init(_ letterCase: Case = .upper) {
+    init(use letterCase: Case = .upper) {
         self.letterCase = letterCase
     }
-    @discardableResult public func to(_ letterCase: Case)  -> Layout {
+    @discardableResult public func use(_ letterCase: Case)  -> Layout {
         self.letterCase = letterCase
         return self
     }
@@ -55,7 +67,7 @@ public class LayoutTags: Layout{
     public var letterCase: Case = .normal
     override public func present(_ event:Event) -> String {
         if let joinedString = event.tags?.joined(separator: delimiter){
-            return joinedString.to(letterCase)
+            return joinedString.use(letterCase)
         }
         else{
             return ""
@@ -68,7 +80,7 @@ public class LayoutTags: Layout{
         self.delimiter = delimiter
         return self
     }
-    @discardableResult public func to(_ letterCase: Case)  -> Layout {
+    @discardableResult public func use(_ letterCase: Case)  -> Layout {
         self.letterCase = letterCase
         return self
     }
@@ -81,17 +93,20 @@ public typealias message = LayoutMessage
 public class LayoutMessage: Layout {
     public var letterCase: Case
     override public func present(_ event:Event) -> String {
-        return event.message.to(letterCase)
+        return event.message.use(letterCase)
     }
     
-    @discardableResult public func to(_ letterCase: Case)  -> Layout {
+    @discardableResult public func use(_ letterCase: Case)  -> Layout {
         self.letterCase = letterCase
         return self
     }
-    init(_ letterCase:Case = .normal) {
+    init(use letterCase:Case = .normal) {
         self.letterCase = letterCase
     }
 }
+
+
+
 
 
 

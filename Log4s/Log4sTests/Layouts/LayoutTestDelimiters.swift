@@ -39,11 +39,6 @@ class LayoutTestDelimiters: XCTestCase {
         super.tearDown()
     }
     
-    func testExample() {
-        // This is an example of a functional test case.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
-    }
-    
     func testPerformanceExample() {
         // This is an example of a performance test case.
         self.measure {
@@ -54,7 +49,6 @@ class LayoutTestDelimiters: XCTestCase {
     
     func testLayoutDelimiter()  {
         let evt = Event(id:0,sev:.fatal, message: "TestLog" , file:#file, method:#function, line: #line)
-        
         
         XCTAssert(LayoutDelimiter(.space).present(evt) == " ")
         XCTAssert(LayoutDelimiter(.spaces(3)).present(evt) == "   ")
@@ -81,50 +75,7 @@ class LayoutTestDelimiters: XCTestCase {
     
 
     
-    func testLayoutChain() {
-        let evt = Event(id:0,sev:.fatal,tags: ["Tag1","Tag2","Tag3"] , message: "TestLog" , file:#file, method:#function, line: #line)
-        let layout = LayoutTime("yy|MM|dd HH:mm:ss")
-        let timePrefix = layout.present(evt)
-
-        //Chain one layout every time
-        layout.chain(delimiter.tab())
-            .chain(severtiy())
-            .chain(delimiter.tab())
-            .chain(message())
-        
-        layout._present(evt){ (res, error) in
-            print(res)
-            XCTAssert( res == "\(timePrefix)\tFATAL\tTestLog" )
-        }
-        
-        // Chain multiple layout at once
-        Layout().chain([
-            dateTime("yy|MM|dd HH:mm:ss"),
-            delimiter.tab(),
-            severtiy(.upper),
-            delimiter.breakline(),
-            delimiter.space(4),
-            message(.lower)
-            ])
-            ._present(evt){ (res, error) in
-            print(res)
-            XCTAssert( res == "\(timePrefix)\tFATAL\n    TESTLOG" )
-        }
-    }
     
-
-    func  testLayoutJoinChains() {
-        // Join two chained layouts
-        
-        let layoutNiceTags = Layout().chain([
-            delimiter.custom("["),
-            tags("#").to(.upper),
-            delimiter.custom("]")
-            ])
-        let layoutMessageWithTime = Layout().chain([
-            delimiter.custom("["),
-            ])
-    }
     
     
 }
