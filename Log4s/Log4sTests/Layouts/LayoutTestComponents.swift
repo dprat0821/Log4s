@@ -38,6 +38,7 @@ class LayoutTestComponents: XCTestCase {
         let output1 = layout1.present(evt)
         print(output1)
         
+        
         //Check default format
         let layout2 = LayoutTime("yy/MM/dd HH:mm:ss")
         let output2 = layout2.present(evt)
@@ -46,27 +47,36 @@ class LayoutTestComponents: XCTestCase {
         //Custom format
         let layout3 = LayoutTime("HH:mm:ss")
         print(layout3.present(evt))
+        
+        
     }
+    
+    
     
     func testLayoutTagsBasic()  {
         //One Tag
         let evt1 = Event(id:0,sev:.fatal, tags: ["Tag1"],message: "TestLog" , file:#file, method:#function, line: #line)
+        
+        let timeFormat = "HH:mm:ss"
+        let outputTime = LayoutTime(timeFormat).present(evt1)
+        
         Layout().chain([
-            delimiter.custom("["),
-            tags(),
-            delimiter.custom("]"),
-            delimiter.tab(),
-            message()
+            Layout.time(timeFormat),
+            " [",
+            Layout.tags().uppercased(),
+            "]",
+            Layout.tab(2),
+            Event.message(),
             ])._present(evt1){ (res, error) in
                 print(res)
-                XCTAssert( res == "[Tag1]\tTestLog" )
+                XCTAssert( res == "\(outputTime) [TAG1]\t\ttestlog" )
         }
         
         //Tag with uppercase
         Layout().chain([
-            delimiter.custom("["),
+            delimiter("["),
             tags().use(.upper),
-            delimiter.custom("]"),
+            delimiter("]"),
             delimiter.tab(),
             message()
             ])._present(evt1){ (res, error) in
@@ -80,9 +90,9 @@ class LayoutTestComponents: XCTestCase {
         
         //Mutiple tags
         Layout().chain([
-            delimiter.custom("["),
+            delimiter("["),
             tags(),
-            delimiter.custom("]"),
+            delimiter("]"),
             delimiter.tab(),
             message()
             ])._present(evt2){ (res, error) in

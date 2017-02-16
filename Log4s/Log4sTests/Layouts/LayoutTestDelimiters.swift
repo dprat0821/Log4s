@@ -46,36 +46,32 @@ class LayoutTestDelimiters: XCTestCase {
         }
     }
     
+    /**String delimiter layouts can be instantiated via two ways. */
     
-    func testLayoutDelimiter()  {
+    func testLayoutDelimiterBasic()  {
         let evt = Event(id:0,sev:.fatal, message: "TestLog" , file:#file, method:#function, line: #line)
         
-        XCTAssert(LayoutDelimiter(.space).present(evt) == " ")
-        XCTAssert(LayoutDelimiter(.spaces(3)).present(evt) == "   ")
-        XCTAssert(LayoutDelimiter(.pipe).present(evt) == " | ")
-        XCTAssert(LayoutDelimiter(.tab).present(evt) == "\t")
-        XCTAssert(LayoutDelimiter(.breakline).present(evt) == "\n")
-        XCTAssert(LayoutDelimiter(.custom("$")).present(evt) == "$")
-        XCTAssert(LayoutDelimiter(.customRepeat("$",3)).present(evt) == "$$$")
-
+        XCTAssert(Layout.space().present(evt) == " ")
+        XCTAssert(Layout.space(times:3).present(evt) == "   ")
+        XCTAssert(Layout.pipe().present(evt) == "|")
+        XCTAssert(Layout.tab().present(evt) == "\t")
+        XCTAssert(Layout.breakline().present(evt) == "\n")
+        XCTAssert(Layout.string("$").present(evt) == "$")
+        XCTAssert(Layout.string("$",times:3).present(evt) == "$$$")
     }
     
-    func testLayoutBrackets() {
-        let evt = Event(id:0,sev:.fatal,tags: ["Tag1","Tag2","Tag3"] , message: "TestLog" , file:#file, method:#function, line: #line)
-        Layout().chain([
-            delimiter.custom("Start:\t"),
-            brackets().embed(message()),
-            delimiter.custom("\tEnd")
-            ])._present(evt){ (res, error) in
-                print(res)
-                XCTAssert(res == "Start:\t[TestLog]\tEnd")
-        }
+    
+    func testLayoutDelimiterAsLayout() {
+        let evt = Event(id:0,sev:.fatal, message: "TestLog" , file:#file, method:#function, line: #line)
         
+        XCTAssert(space.asLayout().present(evt) == " ")
+        XCTAssert(space.asLayout(times: 3).present(evt) == "   ")
+        XCTAssert(pipe.asLayout().present(evt) == "|")
+        XCTAssert(tab.asLayout().present(evt) == "\t")
+        XCTAssert(breakline.asLayout().present(evt) == "\n")
+        XCTAssert("$".asLayout().present(evt) == "$")
+        XCTAssert("$".asLayout().present(evt) == "$$$")
     }
-    
-
-    
-    
     
     
 }

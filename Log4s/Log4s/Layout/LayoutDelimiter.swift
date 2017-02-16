@@ -38,13 +38,24 @@ public enum Delimiter{
     }
 }
 
+
+public extension String{
+    func asLayout(times num: Int = 1) -> LayoutDelimiter {
+        return LayoutDelimiter.init(self, count: num)
+    }
+}
+
 public class LayoutDelimiter: Layout {
-    let type: TypeLayoutDelimiter
+    let type: Delimiter
     override public func present(_ event:Event) -> String {
         return type.raw
     }
-    public init(_ type: TypeLayoutDelimiter){
+    public init(_ type: Delimiter){
         self.type = type
+    }
+    
+    public init(_ symbol: String, count times: Int = 1) {
+        type = .customRepeat(symbol, times)
     }
     
     public static func space(_ num:Int = 1) -> LayoutDelimiter{
@@ -59,7 +70,7 @@ public class LayoutDelimiter: Layout {
         return LayoutDelimiter(.pipe)
     }
     
-    public static func custom(_ str:String, repeat times:Int = 1) -> LayoutDelimiter {
+    public static func symbol(_ str:String, repeat times:Int = 1) -> LayoutDelimiter {
         if times == 1{
             return LayoutDelimiter(.custom(str))
         }
@@ -67,12 +78,12 @@ public class LayoutDelimiter: Layout {
             return LayoutDelimiter(.customRepeat(str, times))
         }
     }
-    public static func tab(_ num:Int = 1)-> LayoutDelimiter{
-        if num == 1{
+    public static func tab(times:Int = 1)-> LayoutDelimiter{
+        if times == 1{
             return LayoutDelimiter(.tab)
         }
         else{
-            return LayoutDelimiter(.tabs(num))
+            return LayoutDelimiter(.tabs(times))
         }
     }
     public static func breakline() -> LayoutDelimiter{return LayoutDelimiter(.breakline)}

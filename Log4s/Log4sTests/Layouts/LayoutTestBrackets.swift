@@ -28,4 +28,73 @@ class LayoutTestBrackets: XCTestCase {
         }
     }
     
+    
+    
+    
+    func testBasic() {
+        let evt = Event(id:0,sev:.fatal,tags: ["Tag1","Tag2","Tag3"] , message: "TestLog" , file:#file, method:#function, line: #line)
+
+        //Basic
+        Layout.chain([
+            "Start:\t",
+            LayoutBrackets().embed(Layout.message()),
+            "\tEnd"
+            ])._present(evt){ (res, error) in
+                print(res)
+                XCTAssert(res == "Start:\t[TestLog]\tEnd")
+        }
+    }
+    
+    func testStatic()  {
+        let evt = Event(id:0,sev:.fatal,tags: ["Tag1","Tag2","Tag3"] , message: "TestLog" , file:#file, method:#function, line: #line)
+        
+        //Basic
+        Layout.chain([
+            "Start:\t",
+            Layout.brackets().embed(Layout.message()),
+            "\tEnd"
+            ])._present(evt){ (res, error) in
+                print(res)
+                XCTAssert(res == "Start:\t[TestLog]\tEnd")
+        }
+    }
+    
+    func testAsLayout()  {
+        let evt = Event(id:0,sev:.fatal,tags: ["Tag1","Tag2","Tag3"] , message: "TestLog" , file:#file, method:#function, line: #line)
+
+        Layout.chain([
+            "Start:\t",
+            "(".asBracketsLayout().embed(Layout.message()),
+            "\tEnd"
+            ])._present(evt){ (res, error) in
+                print(res)
+                XCTAssert(res == "Start:\t(TestLog)\tEnd")
+        }
+    }
+    
+    func testCustom() {
+        let evt = Event(id:0,sev:.fatal,tags: ["Tag1","Tag2","Tag3"] , message: "TestLog" , file:#file, method:#function, line: #line)
+
+        Layout.chain([
+            "Start:\t",
+            Layout.brackets("{").embed(
+                Layout.brackets("<").embed(
+                    Layout.brackets("(").embed(
+                        Layout.brackets("[").embed(
+                            Layout.chain([
+                                Layout.tags(dividedBy: "%").uppercased(),
+                                Layout.tab(times: 2),
+                                Layout.message()
+                            ])
+                        )
+                    )
+                )
+            ),
+            "\tEnd"
+            ])._present(evt){ (res, error) in
+                print(res)
+                XCTAssert(res == "Start:\t{<([TAG1%TAG2%TAG3\t\tTestLog])>}\tEnd")
+        }
+    }
+    
 }

@@ -73,10 +73,10 @@ public class LayoutTags: Layout{
             return ""
         }
     }
-    init(_ delimiter:String = "|") {
-        self.delimiter = delimiter
+    init(dividedBy:String = "|") {
+        self.delimiter = dividedBy
     }
-    @discardableResult public func delimited(by delimiter: String) -> Layout{
+    @discardableResult public func dividedBy(by delimiter: String) -> Layout{
         self.delimiter = delimiter
         return self
     }
@@ -100,7 +100,7 @@ public class LayoutMessage: Layout {
         self.letterCase = letterCase
         return self
     }
-    init(use letterCase:Case = .normal) {
+    init(using letterCase:Case = .normal) {
         self.letterCase = letterCase
     }
 }

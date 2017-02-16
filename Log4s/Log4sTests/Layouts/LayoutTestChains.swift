@@ -36,8 +36,8 @@ class LayoutTestChains: XCTestCase {
         
         //Chain layouts one by one
         layout.chain(delimiter.tab())
-            .chain(severtiy())
-            .chain(delimiter.tab())
+            .chain(severtiy(use: upperCase))
+            .chain(delimiter.space(2))
             .chain(message())
         
         layout._present(evt){ (res, error) in
@@ -49,11 +49,11 @@ class LayoutTestChains: XCTestCase {
         Layout().chain([
             dateTime("yy|MM|dd HH:mm:ss"),
             delimiter.tab(),
-            severtiy(use:.upper),
+            severtiy().useUpperCase,
             delimiter.breakline(),
             //delimiter.space(4),
-            delimiter(.spaces(4)),
-            message(.lower)
+            delimiter.spaces(4),
+            message.upperCase
             ])
             ._present(evt){ (res, error) in
                 print(res)

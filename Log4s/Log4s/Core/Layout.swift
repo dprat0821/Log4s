@@ -11,6 +11,16 @@ import Foundation
 
 public typealias LayoutCompletion = (String, Error?) -> Void
 
+public protocol Layoutable {
+    func asLayout() -> Layout
+}
+
+
+extension String : Layoutable {
+    public func asLayout() -> Layout{
+        return LayoutDelimiter.init(self, count: 1)
+    }
+}
 
 open class Layout {
     
