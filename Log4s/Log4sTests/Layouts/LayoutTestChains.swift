@@ -35,31 +35,49 @@ class LayoutTestChains: XCTestCase {
         let timePrefix = layout.present(evt)
         
         //Chain layouts one by one
-        layout.chain(delimiter.tab())
-            .chain(severtiy(use: upperCase))
-            .chain(delimiter.space(2))
-            .chain(message())
+        layout.chain(Layout.tab())
+            .chain(Layout.severity().uppercased())
+            .chain(Layout.space(times:2))
+            .chain(Layout.message())
         
         layout._present(evt){ (res, error) in
             print(res)
-            XCTAssert( res == "\(timePrefix)\tFATAL\tTestLog" )
+            XCTAssert( res == "\(timePrefix)\tFATAL  TestLog" )
         }
         
+        
+        
+    }
+    
+    func testLayoutChainWithOneCall() {
+        let evt = Event(id:0,sev:.fatal,tags: ["Tag1","Tag2","Tag3"] , message: "TestLog" , file:#file, method:#function, line: #line)
+        
         // Chain multiple layouts with one call
-        Layout().chain([
-            dateTime("yy|MM|dd HH:mm:ss"),
-            delimiter.tab(),
-            severtiy().useUpperCase,
-            delimiter.breakline(),
-            //delimiter.space(4),
-            delimiter.spaces(4),
-            message.upperCase
+        Layout.chain([
+            Layout.tab(),
+            Layout.severity().uppercased(),
+            Layout.breakline(),
+            Layout.spaces(4),
+            Layout.message()
             ])
             ._present(evt){ (res, error) in
                 print(res)
-                XCTAssert( res == "\(timePrefix)\tFATAL\n    testlog" )
+                XCTAssert( res == "\tFATAL\n    testlog" )
         }
-        
+    }
+    
+    func testLayoutChainWithString() {
+        let evt = Event(id:0,sev:.fatal,tags: ["Tag1","Tag2","Tag3"] , message: "TestLog" , file:#file, method:#function, line: #line)
+
+        Layout.chain([
+            "Start:",
+            Layout.severity(),
+            "  Body: ",
+            Layout.message()
+            ])
+            ._present(evt){ (res, error) in
+                print(res)
+                XCTAssert( res == "Start:fatal  Body: testlog" )
     }
     
     // Call chains for multiple times
@@ -67,37 +85,47 @@ class LayoutTestChains: XCTestCase {
         let evt = Event(id:0,sev:.fatal,tags: ["Tag1","Tag2","Tag3"] , message: "TestLog" , file:#file, method:#function, line: #line)
         
         let layout = Layout()
-        layout
-            .chain(severtiy(use: .upper))
-            .chain(delimiter.tab())
+        layout.chain(Layout.severity())
         
         layout.chain([
-            severtiy(use:.upper),
-            delimiter.breakline()
+            Layout.breakline(),
+            Layout.space(4)
             ])
         
-        layout
-            .chain(delimiter.space(4))
-            .chain(message().use(.upper))
+        layout.chain(Layout.message())
         
         layout._present(evt){ (res, error) in
             print(res)
-            XCTAssert( res == "\tFATAL\n    TESTLOG" )
+            XCTAssert( res == "FATAL\n    TESTLOG" )
         }
     }
     
     func  testLayoutJoinChains() {
         // Join two chained layouts
-        
-        let layoutNiceTags = Layout().chain([
-            delimiter.custom("["),
-            tags("#").use(.upper),
-            delimiter.custom("]")
+        let evt = Event(id:0,sev:.fatal,tags: ["Tag1","Tag2","Tag3"] , message: "TestLog" , file:#file, method:#function, line: #line)
+
+        let layoutNiceTags = Layout.chain([
+            Layout.brackets().embed(
+                Layout.tags(dividedBy:",").uppercased()
+            ),
+            Layout.space(times:2)
             ])
-        let layoutMessageWithTime = Layout().chain([
-            delimiter.custom("["),
+        
+        let layoutNiceSev = Layout.chain([
+            Layout.brackets("{").embed(
+                Layout.severity().uppercased()
+            ),
+            Layout.space(times:2)
             ])
         
+        Layout.chain([
+            layoutNiceTags,
+            layoutNiceSev,
+            Layout.message()
+            ])._present(evt){ (res,error) in
+                print(res)
+                XCTAssert(res == "[TAG1,TAG2,TAG3]  {FATAL}  TestLog")
+        }
         
     }
     

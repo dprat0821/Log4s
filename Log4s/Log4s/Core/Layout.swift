@@ -11,20 +11,28 @@ import Foundation
 
 public typealias LayoutCompletion = (String, Error?) -> Void
 
+
+
 public protocol Layoutable {
     func asLayout() -> Layout
 }
 
 
 extension String : Layoutable {
+
     public func asLayout() -> Layout{
         return LayoutDelimiter.init(self, count: 1)
     }
 }
 
-open class Layout {
-    
+open class Layout:Layoutable {
+    public var letterCase: Case = Case.normal
+
     public internal(set) var next: Layout?
+    
+    public final func asLayout() -> Layout{
+        return self
+    }
     
     internal func _present(_ event:Event, completion: @escaping LayoutCompletion){
         let out = present(event)
@@ -51,18 +59,19 @@ open class Layout {
         return nodeNow
     }
     
-    @discardableResult public func chain(_ layout:Layout) -> Layout{
+    @discardableResult public func chain(_ layout:Layoutable) -> Layout{
         let last = self.last()
-        last.next = layout
+        last.next = layout.asLayout()
         return self
     }
     
-    @discardableResult public func chain(_ layouts:[Layout]) -> Layout{
+    @discardableResult public func chain(_ layouts:[Layoutable]) -> Layout{
         var nowNode = self
         
         for l in layouts{
-            nowNode.chain(l)
-            nowNode = l
+            let node = l.asLayout()
+            nowNode.chain(node)
+            nowNode = node
         }
         return self
     }
@@ -72,6 +81,15 @@ open class Layout {
         return self
     }
     
+    @discardableResult public func uppercased()  -> Self {
+        self.letterCase = .upper
+        return self
+    }
+    
+    @discardableResult public func lowercased()  -> Self {
+        self.letterCase = .lower
+        return self
+    }
     
     /**
      override this method
@@ -105,5 +123,7 @@ open class AsyncLayout : Layout {
         completion("",nil)
     }
 }
+
+
 
 

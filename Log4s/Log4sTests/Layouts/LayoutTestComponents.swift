@@ -48,7 +48,9 @@ class LayoutTestComponents: XCTestCase {
         let layout3 = LayoutTime("HH:mm:ss")
         print(layout3.present(evt))
         
-        
+        //Another way for instantiation
+        let layout4 = Layout.time("yy/MM/dd HH:mm:ss")
+        XCTAssert(layout4.present(evt) == output1)
     }
     
     
@@ -57,85 +59,46 @@ class LayoutTestComponents: XCTestCase {
         //One Tag
         let evt1 = Event(id:0,sev:.fatal, tags: ["Tag1"],message: "TestLog" , file:#file, method:#function, line: #line)
         
-        let timeFormat = "HH:mm:ss"
-        let outputTime = LayoutTime(timeFormat).present(evt1)
+        XCTAssert(Layout.tags().present(evt1) == "Tag1")
+        XCTAssert(Layout.tags().uppercased().present(evt1) == "TAG1")
+        XCTAssert(Layout.tags().lowercased().present(evt1) == "tag1")
         
-        Layout().chain([
-            Layout.time(timeFormat),
-            " [",
-            Layout.tags().uppercased(),
-            "]",
-            Layout.tab(2),
-            Event.message(),
-            ])._present(evt1){ (res, error) in
-                print(res)
-                XCTAssert( res == "\(outputTime) [TAG1]\t\ttestlog" )
-        }
-        
-        //Tag with uppercase
-        Layout().chain([
-            delimiter("["),
-            tags().use(.upper),
-            delimiter("]"),
-            delimiter.tab(),
-            message()
-            ])._present(evt1){ (res, error) in
-                print(res)
-                XCTAssert( res == "[TAG1]\tTestLog" )
-        }
     }
     
     func testLayoutTagsMutipleTags() {
         let evt2 = Event(id:0,sev:.fatal, tags: ["Tag1","Tag2","Tag3"],message: "TestLog" , file:#file, method:#function, line: #line)
         
         //Mutiple tags
-        Layout().chain([
-            delimiter("["),
-            tags(),
-            delimiter("]"),
-            delimiter.tab(),
-            message()
-            ])._present(evt2){ (res, error) in
-                print(res)
-                XCTAssert( res == "[Tag1|Tag2|Tag3]\tTestLog" )
-        }
+        XCTAssert(Layout.tags().present(evt2) == "Tag1|Tag2|Tag3")
+        XCTAssert(Layout.tags().uppercased().present(evt2) == "TAG1|TAG2|TAG3")
+        XCTAssert(Layout.tags().lowercased().present(evt2) == "tag1|tag2|tag3")
+        
         
         //Custom tag delimiter
-        Layout().chain([
-            delimiter.custom("["),
-            tags(","),
-            delimiter.custom("]"),
-            delimiter.tab(),
-            message()
-            ])._present(evt2){ (res, error) in
-                print(res)
-                XCTAssert( res == "[Tag1,Tag2,Tag3]\tTestLog" )
-        }
+        
+        XCTAssert(Layout.tags(dividedBy:",").present(evt2) == "Tag1,Tag2,Tag3")
     }
     
     func testLayoutTagsWithoutTag() {
         // No tag
         let evt = Event(id:0,sev:.fatal,message: "TestLog" , file:#file, method:#function, line: #line)
-        Layout().chain([
-            delimiter.custom("["),
-            tags(),
-            delimiter.custom("]"),
-            delimiter.tab(),
-            message()
-            ])._present(evt){ (res, error) in
-                print(res)
-                XCTAssert( res == "[]\tTestLog" )
-        }
+        XCTAssert(Layout.tags().present(evt) == "")
+
     }
     
-    
+    func testLayoutSev()  {
+        let evt = Event(id:0,sev:.fatal,message: "TestLog" , file:#file, method:#function, line: #line)
+        XCTAssert(Layout.severity().present(evt) == "Fatal")
+        XCTAssert(Layout.severity().uppercased().present(evt) == "FATAL")
+        XCTAssert(Layout.severity().lowercased().present(evt) == "fatal")
+
+    }
     
     func testLayoutMessage()  {
         let evt = Event(id:0,sev:.warn, message: "TestLog" , file:#file, method:#function, line: #line)
-        LayoutMessage(.lower)._present(evt){ (res, error) in
-            print(res)
-            XCTAssert( res == "testlog" )
-        }
         
+        XCTAssert(Layout.message().present(evt) == "testlog")
+        XCTAssert(Layout.message().uppercased().present(evt) == "TESTLOG")
+    
     }
 }

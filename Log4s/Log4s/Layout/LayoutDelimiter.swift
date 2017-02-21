@@ -90,5 +90,12 @@ public class LayoutDelimiter: Layout {
     
 }
 
+extension Layout{
+    public static func space(times: Int) -> LayoutDelimiter{
+        return LayoutDelimiter.space(times)
+    }
+    public static func pipe() -> 
+}
+
 
 

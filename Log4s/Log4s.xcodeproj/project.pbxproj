@@ -115,8 +115,8 @@
 			children = (
 				5C717C771E4BB62D00675AA9 /* LayoutTestDelimiters.swift */,
 				5C717C751E4BB60700675AA9 /* LayoutTestComponents.swift */,
-				ABDC0A2A1E4C0ED40020469A /* LayoutTestChains.swift */,
 				ABDC0A2C1E4C0EE90020469A /* LayoutTestBrackets.swift */,
+				ABDC0A2A1E4C0ED40020469A /* LayoutTestChains.swift */,
 			);
 			name = Layouts;
 			sourceTree = "<group>";

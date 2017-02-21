@@ -45,26 +45,29 @@ public class LayoutTime: Layout {
 //
 public typealias severtiy = LayoutSeverity
 public class LayoutSeverity: Layout {
-    public var letterCase: Case
     override public func present(_ event:Event) -> String {
         return String(describing: event.sev).use(letterCase)
     }
-    init(use letterCase: Case = .upper) {
-        self.letterCase = letterCase
-    }
-    @discardableResult public func use(_ letterCase: Case)  -> Layout {
-        self.letterCase = letterCase
-        return self
-    }
+
+//    @discardableResult public func uppercased()  -> LayoutSeverity {
+//        self.letterCase = .upper
+//        return self
+//    }
+//    
+//    @discardableResult public func lowercased()  -> LayoutSeverity {
+//        self.letterCase = .lower
+//        return self
+//    }
 }
 
 //
 // MARK: LayoutTags
 //
 public typealias tags = LayoutTags
+let defaultTagDivider = "|"
 public class LayoutTags: Layout{
     public var delimiter: String
-    public var letterCase: Case = .normal
+//    public var letterCase: Case = .normal
     override public func present(_ event:Event) -> String {
         if let joinedString = event.tags?.joined(separator: delimiter){
             return joinedString.use(letterCase)
@@ -73,17 +76,14 @@ public class LayoutTags: Layout{
             return ""
         }
     }
-    init(dividedBy:String = "|") {
+    init(dividedBy:String = defaultTagDivider) {
         self.delimiter = dividedBy
     }
     @discardableResult public func dividedBy(by delimiter: String) -> Layout{
         self.delimiter = delimiter
         return self
     }
-    @discardableResult public func use(_ letterCase: Case)  -> Layout {
-        self.letterCase = letterCase
-        return self
-    }
+
 }
 
 //
@@ -91,21 +91,39 @@ public class LayoutTags: Layout{
 //
 public typealias message = LayoutMessage
 public class LayoutMessage: Layout {
-    public var letterCase: Case
+//    public var letterCase: Case
     override public func present(_ event:Event) -> String {
-        return event.message.use(letterCase)
+        return event.message
     }
     
-    @discardableResult public func use(_ letterCase: Case)  -> Layout {
-        self.letterCase = letterCase
-        return self
-    }
-    init(using letterCase:Case = .normal) {
-        self.letterCase = letterCase
-    }
+//    @discardableResult public func use(_ letterCase: Case)  -> Layout {
+//        self.letterCase = letterCase
+//        return self
+//    }
+
 }
 
 
+extension Layout{
+    public static func id() -> LayoutId{
+        return LayoutId()
+    }
+    
+    public static func time(_ format:String = defaultTimeFormat) -> LayoutTime{
+        return LayoutTime(format)
+    }
+    
+    public static func severity() -> LayoutSeverity {
+        return LayoutSeverity()
+    }
+    
+    public static func tags(dividedBy: String = defaultTagDivider) -> LayoutTags{
+        return LayoutTags(dividedBy: dividedBy)
+    }
+    public static func message() -> LayoutMessage {
+        return LayoutMessage()
+    }
+}
 
 
 

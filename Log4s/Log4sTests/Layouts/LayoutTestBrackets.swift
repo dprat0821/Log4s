@@ -7,6 +7,7 @@
 //
 
 import XCTest
+@testable import Log4s
 
 class LayoutTestBrackets: XCTestCase {
     
@@ -35,44 +36,67 @@ class LayoutTestBrackets: XCTestCase {
         let evt = Event(id:0,sev:.fatal,tags: ["Tag1","Tag2","Tag3"] , message: "TestLog" , file:#file, method:#function, line: #line)
 
         //Basic
-        Layout.chain([
-            "Start:\t",
-            LayoutBrackets().embed(Layout.message()),
-            "\tEnd"
-            ])._present(evt){ (res, error) in
-                print(res)
-                XCTAssert(res == "Start:\t[TestLog]\tEnd")
+        LayoutBrackets().embed(
+            Layout.message()
+        )
+        ._present(evt){ (res, error) in
+            print(res)
+            XCTAssert(res == "[TestLog]")
+        }
+        
+        //Static
+        Layout.brackets().embed(
+            Layout.message()
+        )
+        ._present(evt){ (res, error) in
+            print(res)
+            XCTAssert(res == "[TestLog]")
         }
     }
     
-    func testStatic()  {
+    func testCustomize() {
         let evt = Event(id:0,sev:.fatal,tags: ["Tag1","Tag2","Tag3"] , message: "TestLog" , file:#file, method:#function, line: #line)
         
-        //Basic
-        Layout.chain([
-            "Start:\t",
-            Layout.brackets().embed(Layout.message()),
-            "\tEnd"
-            ])._present(evt){ (res, error) in
+        Layout.brackets("{").embed( //Preset symbol
+            Layout.message()
+            )
+            ._present(evt){ (res, error) in
                 print(res)
-                XCTAssert(res == "Start:\t[TestLog]\tEnd")
+                XCTAssert(res == "{TestLog}")
         }
+        
+        Layout.brackets("!").embed( //Non-preset symbol: will use the same symbol as pair
+            Layout.message()
+            )
+            ._present(evt){ (res, error) in
+                print(res)
+                XCTAssert(res == "!TestLog!")
+        }
+        
+        Layout.brackets(left:"<", right: "|").embed(    //Explicit set the pairs
+            Layout.message()
+            )
+            ._present(evt){ (res, error) in
+                print(res)
+                XCTAssert(res == "<TestLog|")
+            }
     }
+
     
     func testAsLayout()  {
         let evt = Event(id:0,sev:.fatal,tags: ["Tag1","Tag2","Tag3"] , message: "TestLog" , file:#file, method:#function, line: #line)
 
-        Layout.chain([
-            "Start:\t",
-            "(".asBracketsLayout().embed(Layout.message()),
-            "\tEnd"
-            ])._present(evt){ (res, error) in
+        "(".asBracketsLayout().embed(
+            Layout.message()
+        )
+            ._present(evt){ (res, error) in
                 print(res)
-                XCTAssert(res == "Start:\t(TestLog)\tEnd")
+                XCTAssert(res == "(TestLog)")
         }
+        
     }
     
-    func testCustom() {
+    func testMutipleLayers() {
         let evt = Event(id:0,sev:.fatal,tags: ["Tag1","Tag2","Tag3"] , message: "TestLog" , file:#file, method:#function, line: #line)
 
         Layout.chain([
