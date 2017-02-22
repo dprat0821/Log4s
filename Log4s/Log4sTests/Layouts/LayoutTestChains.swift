@@ -53,16 +53,17 @@ class LayoutTestChains: XCTestCase {
         let evt = Event(id:0,sev:.fatal,tags: ["Tag1","Tag2","Tag3"] , message: "TestLog" , file:#file, method:#function, line: #line)
         
         // Chain multiple layouts with one call
+        
         Layout.chain([
             Layout.tab(),
             Layout.severity().uppercased(),
             Layout.breakline(),
-            Layout.spaces(4),
+            Layout.space(times:4),
             Layout.message()
             ])
             ._present(evt){ (res, error) in
                 print(res)
-                XCTAssert( res == "\tFATAL\n    testlog" )
+                XCTAssert( res == "\tFATAL\n    TestLog" )
         }
     }
     
@@ -73,7 +74,7 @@ class LayoutTestChains: XCTestCase {
             "Start:",
             Layout.severity(),
             "  Body: ",
-            Layout.message()
+            Layout.message().lowercased()
             ])
             ._present(evt){ (res, error) in
                 print(res)
@@ -89,7 +90,7 @@ class LayoutTestChains: XCTestCase {
         
         layout.chain([
             Layout.breakline(),
-            Layout.space(4)
+            Layout.space(times:4)
             ])
         
         layout.chain(Layout.message())
@@ -125,8 +126,9 @@ class LayoutTestChains: XCTestCase {
             ])._present(evt){ (res,error) in
                 print(res)
                 XCTAssert(res == "[TAG1,TAG2,TAG3]  {FATAL}  TestLog")
-        }
+            }
         
-    }
+        }
     
+    }
 }

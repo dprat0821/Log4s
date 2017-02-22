@@ -76,6 +76,16 @@ open class Layout:Layoutable {
         return self
     }
     
+    static public func chain(_ layout:Layoutable) -> Layout {
+        return layout.asLayout()
+    }
+    
+    static public func chain(_ layouts:[Layoutable]) -> Layout{
+        let root = Layout()
+        root.chain(layouts)
+        return root
+    }
+    
     public func resetChain() -> Layout{
         next = nil
         return self

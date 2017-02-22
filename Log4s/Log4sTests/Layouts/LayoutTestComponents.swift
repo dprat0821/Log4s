@@ -88,7 +88,7 @@ class LayoutTestComponents: XCTestCase {
     
     func testLayoutSev()  {
         let evt = Event(id:0,sev:.fatal,message: "TestLog" , file:#file, method:#function, line: #line)
-        XCTAssert(Layout.severity().present(evt) == "Fatal")
+        XCTAssert(Layout.severity().present(evt) == "fatal")
         XCTAssert(Layout.severity().uppercased().present(evt) == "FATAL")
         XCTAssert(Layout.severity().lowercased().present(evt) == "fatal")
 
@@ -97,7 +97,7 @@ class LayoutTestComponents: XCTestCase {
     func testLayoutMessage()  {
         let evt = Event(id:0,sev:.warn, message: "TestLog" , file:#file, method:#function, line: #line)
         
-        XCTAssert(Layout.message().present(evt) == "testlog")
+        XCTAssert(Layout.message().present(evt) == "TestLog")
         XCTAssert(Layout.message().uppercased().present(evt) == "TESTLOG")
     
     }

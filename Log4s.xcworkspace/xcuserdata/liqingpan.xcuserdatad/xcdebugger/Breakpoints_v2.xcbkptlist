@@ -2,4 +2,102 @@
 <Bucket
    type = "0"
    version = "2.0">
+   <Breakpoints>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Log4s/Log4sTests/Layouts/LayoutTestComponents.swift"
+            timestampString = "509474140.242365"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "101"
+            endingLineNumber = "101"
+            landmarkName = "testLayoutMessage()"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Log4sTests.LayoutTestComponents.testLayoutMessage () -&gt; ()"
+                  moduleName = "Log4sTests"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/liqingpan/Code/Log4s/Log4s/Log4sTests/Layouts/LayoutTestComponents.swift"
+                  timestampString = "509474202.217906"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "101"
+                  endingLineNumber = "101"
+                  offsetFromSymbolStart = "420">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Log4sTests.LayoutTestComponents.(testLayoutMessage () -&gt; ()).(implicit closure #2)"
+                  moduleName = "Log4sTests"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/liqingpan/Code/Log4s/Log4s/Log4sTests/Layouts/LayoutTestComponents.swift"
+                  timestampString = "509474202.219689"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "101"
+                  endingLineNumber = "101"
+                  offsetFromSymbolStart = "16">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Log4s/Log4sTests/Layouts/LayoutTestChains.swift"
+            timestampString = "509474198.028713"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "81"
+            endingLineNumber = "81"
+            landmarkName = "testLayoutChainWithString()"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Log4sTests.LayoutTestChains.(testLayoutChainWithString () -&gt; ()).(closure #1)"
+                  moduleName = "Log4sTests"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/liqingpan/Code/Log4s/Log4s/Log4sTests/Layouts/LayoutTestChains.swift"
+                  timestampString = "509474202.221549"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "81"
+                  endingLineNumber = "81"
+                  offsetFromSymbolStart = "186">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Log4sTests.LayoutTestChains.(testLayoutChainWithString () -&gt; ()).(closure #1).(implicit closure #1)"
+                  moduleName = "Log4sTests"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/liqingpan/Code/Log4s/Log4s/Log4sTests/Layouts/LayoutTestChains.swift"
+                  timestampString = "509474202.222787"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "81"
+                  endingLineNumber = "81"
+                  offsetFromSymbolStart = "24">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+   </Breakpoints>
 </Bucket>

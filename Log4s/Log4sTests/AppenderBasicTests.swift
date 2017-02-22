@@ -40,14 +40,14 @@ class AppenderBasicTests: XCTestCase {
         appender._dump(evt)
         
         // Assign multiple layout
-        appender
-            .add(layout: delimiter.tab())
-            .add(layout: delimiter("["))
-            .add(layout: severtiy().use(Case.upper))
-            .add(layout: delimiter("]"))
-            .add(layout: delimiter.tab())
-            .add(layout: message(Case.upper))
-        appender._dump(evt)
+//        appender
+//            .add(layout: delimiter.tab())
+//            .add(layout: delimiter("["))
+//            .add(layout: severtiy().uppercased()))
+//            .add(layout: delimiter("]"))
+//            .add(layout: delimiter.tab())
+//            .add(layout: message(Case.upper))
+//        appender._dump(evt)
         
         
     }

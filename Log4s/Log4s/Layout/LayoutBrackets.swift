@@ -9,13 +9,15 @@
 import Foundation
 
 typealias brackets = LayoutBrackets
+let defaultLayoutBracketSymbol = "["
+
 public class LayoutBrackets: Layout {
     public var leftBracket: String
     public var rightBracket: String
     public var embededLayout: Layout?
     public var isEliminateWhenEmpty = false
     
-    init(_ symbol: String = "[") {
+    init(_ symbol: String = defaultLayoutBracketSymbol) {
         if symbol == "["{
             leftBracket = "["
             rightBracket = "]"
@@ -86,5 +88,21 @@ public class LayoutBrackets: Layout {
                 completion( "\(self.leftBracket)\(self.rightBracket)", nil)
             }
         }
+    }
+}
+
+extension Layout{
+    public static func brackets(_ symbol: String = defaultLayoutBracketSymbol) -> LayoutBrackets{
+        return LayoutBrackets(symbol)
+    }
+    
+    public static func brackets(left:String, right: String) -> LayoutBrackets{
+        return LayoutBrackets(left:left,right:right)
+    }
+}
+
+extension String{
+    public func asBracketsLayout() -> LayoutBrackets{
+        return LayoutBrackets(self)
     }
 }

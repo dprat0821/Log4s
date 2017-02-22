@@ -70,7 +70,6 @@ class LayoutTestDelimiters: XCTestCase {
         XCTAssert(tab.asLayout().present(evt) == "\t")
         XCTAssert(breakline.asLayout().present(evt) == "\n")
         XCTAssert("$".asLayout().present(evt) == "$")
-        XCTAssert("$".asLayout().present(evt) == "$$$")
     }
     
     

@@ -28,7 +28,7 @@ public enum Delimiter{
         switch self {
         case .space:            return " "
         case .spaces(let num):   return String.init(repeating: " ", count: num)
-        case .pipe:             return " | "
+        case .pipe:             return "|"
         case .tab:              return "\t"
         case .tabs(let num):    return String.init(repeating: "\t", count: num)
         case .breakline:        return "\n"
@@ -45,6 +45,11 @@ public extension String{
     }
 }
 
+let space = " "
+let tab = "\t"
+let breakline = "\n"
+let pipe = "|"
+
 public class LayoutDelimiter: Layout {
     let type: Delimiter
     override public func present(_ event:Event) -> String {
@@ -58,12 +63,17 @@ public class LayoutDelimiter: Layout {
         type = .customRepeat(symbol, times)
     }
     
-    public static func space(_ num:Int = 1) -> LayoutDelimiter{
-        if num == 1{
+    
+    
+}
+
+extension Layout{
+    public static func space(times:Int = 1) -> LayoutDelimiter{
+        if times == 1{
             return LayoutDelimiter(.space)
         }
         else{
-            return LayoutDelimiter(.spaces(num))
+            return LayoutDelimiter(.spaces(times))
         }
     }
     public static func pipe() -> LayoutDelimiter{
@@ -87,14 +97,7 @@ public class LayoutDelimiter: Layout {
         }
     }
     public static func breakline() -> LayoutDelimiter{return LayoutDelimiter(.breakline)}
-    
-}
-
-extension Layout{
-    public static func space(times: Int) -> LayoutDelimiter{
-        return LayoutDelimiter.space(times)
-    }
-    public static func pipe() -> 
+    public static func string(_ symbol: String, times:Int = 1) -> LayoutDelimiter{return LayoutDelimiter(.customRepeat(symbol,times))}
 }
 
 
