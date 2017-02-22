@@ -6,7 +6,7 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            shouldBeEnabled = "Yes"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Log4s/Log4sTests/Layouts/LayoutTestComponents.swift"
@@ -19,14 +19,14 @@
             landmarkType = "7">
             <Locations>
                <Location
-                  shouldBeEnabled = "Yes"
+                  shouldBeEnabled = "No"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
                   symbolName = "Log4sTests.LayoutTestComponents.testLayoutMessage () -&gt; ()"
                   moduleName = "Log4sTests"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/liqingpan/Code/Log4s/Log4s/Log4sTests/Layouts/LayoutTestComponents.swift"
-                  timestampString = "509474202.217906"
+                  timestampString = "509481183.522703"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "101"
@@ -34,14 +34,14 @@
                   offsetFromSymbolStart = "420">
                </Location>
                <Location
-                  shouldBeEnabled = "Yes"
+                  shouldBeEnabled = "No"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
                   symbolName = "Log4sTests.LayoutTestComponents.(testLayoutMessage () -&gt; ()).(implicit closure #2)"
                   moduleName = "Log4sTests"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/liqingpan/Code/Log4s/Log4s/Log4sTests/Layouts/LayoutTestComponents.swift"
-                  timestampString = "509474202.219689"
+                  timestampString = "509481183.524582"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "101"
@@ -54,7 +54,7 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            shouldBeEnabled = "Yes"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Log4s/Log4sTests/Layouts/LayoutTestChains.swift"
@@ -67,14 +67,14 @@
             landmarkType = "7">
             <Locations>
                <Location
-                  shouldBeEnabled = "Yes"
+                  shouldBeEnabled = "No"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
                   symbolName = "Log4sTests.LayoutTestChains.(testLayoutChainWithString () -&gt; ()).(closure #1)"
                   moduleName = "Log4sTests"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/liqingpan/Code/Log4s/Log4s/Log4sTests/Layouts/LayoutTestChains.swift"
-                  timestampString = "509474202.221549"
+                  timestampString = "509481183.526495"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "81"
@@ -82,14 +82,14 @@
                   offsetFromSymbolStart = "186">
                </Location>
                <Location
-                  shouldBeEnabled = "Yes"
+                  shouldBeEnabled = "No"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
                   symbolName = "Log4sTests.LayoutTestChains.(testLayoutChainWithString () -&gt; ()).(closure #1).(implicit closure #1)"
                   moduleName = "Log4sTests"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/liqingpan/Code/Log4s/Log4s/Log4sTests/Layouts/LayoutTestChains.swift"
-                  timestampString = "509474202.222787"
+                  timestampString = "509481183.52775"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "81"

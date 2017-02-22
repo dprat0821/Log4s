@@ -17,15 +17,7 @@ class LayoutCustomDelay: AsyncLayout {
     }
 }
 
-class MyAppenderListener: AppenderListener {
-    func on(appender: Appender, logged event: Event, with error: Error?){
-        
-    }
-    func on(appender: Appender, changeSevertiy: (from: Severity, to: Severity)){
-    }
-    func on(appender: Appender, changedTo layout: Layout){
-    }
-}
+
 
 class LayoutTestDelimiters: XCTestCase {
     

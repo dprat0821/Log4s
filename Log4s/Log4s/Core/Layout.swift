@@ -11,8 +11,6 @@ import Foundation
 
 public typealias LayoutCompletion = (String, Error?) -> Void
 
-
-
 public protocol Layoutable {
     func asLayout() -> Layout
 }

@@ -46,7 +46,7 @@ public class LayoutTime: Layout {
 public typealias severtiy = LayoutSeverity
 public class LayoutSeverity: Layout {
     override public func present(_ event:Event) -> String {
-        return String(describing: event.sev).use(letterCase)
+        return String(describing: event.sev).using(letterCase)
     }
 }
 
@@ -59,7 +59,7 @@ public class LayoutTags: Layout{
     public var delimiter: String
     override public func present(_ event:Event) -> String {
         if let joinedString = event.tags?.joined(separator: delimiter){
-            return joinedString.use(letterCase)
+            return joinedString.using(letterCase)
         }
         else{
             return ""
@@ -81,18 +81,8 @@ public class LayoutTags: Layout{
 public typealias message = LayoutMessage
 public class LayoutMessage: Layout {
     override public func present(_ event:Event) -> String {
-        switch letterCase {
-        case .lower:
-            return event.message.lowercased()
-        case .upper:
-            return event.message.uppercased()
-        case .normal:
-            return event.message
-        }
-        
+        return event.message.using(letterCase)
     }
-    
-
 }
 
 

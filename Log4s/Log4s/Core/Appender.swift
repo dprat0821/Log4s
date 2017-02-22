@@ -15,34 +15,44 @@ let nameSetSeverity = Notification.Name(rawValue: "severity")
 
 public protocol AppenderListener {
     func on(appender: Appender, logged event: Event, with error: Error?)
-    func on(appender: Appender, changeSevertiy: (from: Severity, to: Severity))
-    func on(appender: Appender, changedTo layout: Layout)
+    func on(appender: Appender, changed: (from: Severity, to: Severity))
+    func on(appender: Appender, changed layout: Layout)
 }
 
 /**
     The root class of all *Appender*s.
  
+    *Appender* dumps *Event*s to a particular destination, eg. XCode console, logging server, MDM logging SDK, etc.
+ 
+    An *Event*s passed in will be dumped only when it matches following critiria:
+ 
+    1. The severity of the event is no greater than *maxSeverity* of this *Appender*
+ 
+    2. *filterTags* of this *Appender* is nil, or its intersection with Event's tags is not empty
+    
+    Otherwise, it will be ignored.
+ 
+ 
+ 
+    *Appender*s are independent from *Logger* and can be shared between *Logger*s.
  */
 open class Appender{
 
-    public private(set) var layout: Layout = Layout().chain(LayoutMessage())
+    public private(set) var layout: Layout = LayoutMessage()
     public private(set) var isUseDefaultConfig:Bool = true
     
     public func useDefaultConfig(){
         if !isUseDefaultConfig{
             isUseDefaultConfig = true
-            self.layout = Layout().chain(LayoutMessage())
+            self.layout = LayoutMessage()
         }
     }
     
     public var listener: AppenderListener?
     
     public var maxSeverity: Severity = .verbose{
-        willSet{
-            listener?.on(appender: self, changeSevertiy: (from:maxSeverity, to: newValue))
-        }
         didSet{
-            NotificationCenter.default.post(name: nameSetSeverity, object: self, userInfo: nil)
+            listener?.on(appender: self, changed: (from:oldValue, to: maxSeverity))
         }
     }
     
@@ -52,7 +62,11 @@ open class Appender{
         - Attention: if *filterTags* == *nil*, *Event*s configured with any tags (or no tag at all) will be valid for this critiria
      */
     public var filterTags: Set<String>?
-    public func isMatchTags(event:Event) -> Bool{
+    
+    /**
+        Check whether an event has at least one tag the same with the *Appender*s
+     */
+    public func matchTags(of event:Event) -> Bool{
         if let filter = filterTags, let tags = event.tags{
             let tagsEvent = Set(tags)
             return filter.intersection(tagsEvent).count == 0
@@ -70,18 +84,18 @@ open class Appender{
     //  MARK: Layouts
     //
     
-    @discardableResult public func add(layout:Layout) -> Appender {
+    @discardableResult public func add(layout:Layoutable) -> Appender {
         return self.add(layouts: [layout])
     }
     
-    @discardableResult public func add(layouts: [Layout]) -> Appender {
+    @discardableResult public func add(layouts: [Layoutable]) -> Appender {
         if isUseDefaultConfig{
             layout = Layout()
             isUseDefaultConfig = false
         }
         
         layout.chain(layouts)
-        listener?.on(appender: self, changedTo: self.layout)
+        listener?.on(appender: self, changed: self.layout)
         return self
     }
     
@@ -91,20 +105,8 @@ open class Appender{
     //
     
     internal func _dump(_ event: Event, completion: DumpCompletion? = nil) {
-        var bValid = false
-        if event.sev.rawValue <= maxSeverity.rawValue{
-            if let filter = filterTags, let tags = event.tags{
-                let tagsEvent = Set(tags)
-                
-                bValid = filter.intersection(tagsEvent).count != 0
-                
-            }
-            else{
-                bValid = true
-            }
-        }
         
-        if bValid{
+        if event.sev.rawValue <= maxSeverity.rawValue && self.matchTags(of: event){
             evtQueue.append((event,completion))
             _dequeue()
         }
