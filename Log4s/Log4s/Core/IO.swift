@@ -12,7 +12,7 @@ import Foundation
 public typealias IOValue = AnyObject
 public typealias IODict = [String:IOValue]
 public typealias IOArray = [IOValue]
-public typealias InputCompletion = (IODict?) -> ()
+public typealias InputCompletion = (IODict?,Error?) -> ()
 
 
 
@@ -25,15 +25,15 @@ enum IOError: Error {
 
 
 
-public protocol Reader {
-    func read(fromFile path:String, completion:InputCompletion) throws
-    func read(fromString string:String,completion:InputCompletion) throws
-    func read(fromData data:Data,completion:InputCompletion) throws
+public protocol Inputter {
+    func read(path:URL, completion:InputCompletion)
+    func read(string:String,completion:InputCompletion)
+    func read(data:Data,completion:InputCompletion)
 }
 
 
 
 
-public protocol Writer {
-    func write(source:IOValue,toString completion: (String)->()) throws
+public protocol Outputter {
+    func write(source:IOValue,toString completion: (String)->())
 }

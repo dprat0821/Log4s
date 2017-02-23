@@ -11,9 +11,9 @@ import XCTest
 
 
 class AppenderTestBasic: XCTestCase {
-    let evtMultipleTags = Event(id:0,sev:.fatal, tags: ["Tag1","Tag2","Tag3"],message: "TestEventMultipleTags" , file:#file, method:#function, line: #line)
+    let evtFatalMultipleTags = Event(id:0,sev:.fatal, tags: ["Tag1","Tag2","Tag3"],message: "TestEventMultipleTags" , file:#file, method:#function, line: #line)
     
-    
+    let appenderConsole = Appender()
     
     
     override func setUp() {
@@ -26,10 +26,6 @@ class AppenderTestBasic: XCTestCase {
         super.tearDown()
     }
     
-    func testExample() {
-        // This is an example of a functional test case.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
-    }
     
     func testPerformanceExample() {
         // This is an example of a performance test case.
@@ -39,5 +35,14 @@ class AppenderTestBasic: XCTestCase {
     }
     
     
+    func testLogging() {
+        appenderConsole._dump(evtFatalMultipleTags)
+        appenderConsole._dump(evtFatalMultipleTags){ (err) in
+            if let err = err{
+                print(err)
+            }
+        }
+    }
     
+
 }

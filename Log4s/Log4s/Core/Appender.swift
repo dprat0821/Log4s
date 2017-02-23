@@ -9,9 +9,7 @@
 import Foundation
 
 public typealias DumpCompletion = ( Error? ) -> Void
-public
-
-let nameSetSeverity = Notification.Name(rawValue: "severity")
+public let nameSetSeverity = Notification.Name(rawValue: "severity")
 
 public protocol AppenderListener {
     func on(appender: Appender, logged event: Event, with error: Error?)

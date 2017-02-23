@@ -9,33 +9,43 @@
 import Foundation
 
 
-class JSONInputter {
-    func input(file name:String, completion:InputCompletion) throws {
-        
-        //Finish this method later...
-    }
-    
-    func input(string:String,completion:InputCompletion) throws{
-        guard let data = string.data(using: String.Encoding.utf8) else {
-            throw IOError.encodeFailure(method: "UTF8")
-        }
+class JSONInputter : Inputter{
+    func read(path:URL, completion:InputCompletion) {
         do{
-            try input(data:data, completion: completion)
+            let data = try Data(contentsOf: path)
+            read(data: data, completion: completion)
         }catch{
-            throw error
+            completion(nil, error)
         }
     }
     
-    func input(data:Data,completion:InputCompletion) throws{
-        
-        guard let obj = try JSONSerialization.jsonObject(with: data as Data, options: []) as? IODict else {
-            throw IOError.invalidFormat(path: String(describing: data), format: "JSON")
+    func read(string:String,completion:InputCompletion){
+        guard let data = string.data(using: String.Encoding.utf8) else {
+            completion(nil, IOError.encodeFailure(method: "UTF8"))
+            return
         }
-        completion(obj)
+        read(data:data, completion: completion)
+    }
+    
+    func read(data:Data,completion:InputCompletion){
+        do{
+            guard let obj = try JSONSerialization.jsonObject(with: data as Data, options: []) as? IODict else {
+                completion(nil, IOError.invalidFormat(path: String(describing: data), format: "JSON"))
+                return
+            }
+            completion(obj,nil)
+        }catch{
+            completion(nil, error)
+        }
+        
     }
 }
 
-class JSONOutputter {
+class JSONOutputter : Outputter{
+    
+    func write(source: IOValue, toString completion: (String) -> ()) {
+        
+    }
     func outputString(source:IOValue,completion: (String)->()) throws{
         do{
             let jsonData = try JSONSerialization.data(withJSONObject: source, options: JSONSerialization.WritingOptions())
