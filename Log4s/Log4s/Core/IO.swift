@@ -26,14 +26,12 @@ enum IOError: Error {
 
 
 public protocol Inputter {
-    func read(path:URL, completion:InputCompletion)
-    func read(string:String,completion:InputCompletion)
-    func read(data:Data,completion:InputCompletion)
+    func read(from path:URL, completion: @escaping InputCompletion)
+    func read(from string:String,  completion: @escaping InputCompletion)
+    func read(from data:Data,completion: @escaping InputCompletion)
 }
 
 
-
-
 public protocol Outputter {
-    func write(source:IOValue,toString completion: (String)->())
+    func write(stringFrom source:IOValue,completion: @escaping (String?,Error?)->())
 }

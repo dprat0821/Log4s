@@ -10,10 +10,12 @@ import Foundation
 
 
 
-
 func logger(_ name:String = "") -> Logger {
     return Logger.inst(name)
 }
+
+
+
 
 final public class Logger{
     
@@ -89,25 +91,22 @@ final public class Logger{
     //
     public private(set) var numEvents: UInt = 0
     
-    public func log(event: Event){
-        for a in appenders {
-            a._dump(event)
+    func log(_ event: Event){
+        for a in self.appenders {
+            a.dump(event){error in}
         }
+        numEvents += 1
     }
     
     
-    public func log(_ severity: Severity, tags: [String]? = nil, message: String, file: String = #file, method: String = #function, line: UInt = #line) {
+    public func log(_ message: String, severity: Severity = .info, tags: [String]? = nil , file: String = #file, method: String = #function, line: UInt = #line) {
         if appendersSev.rawValue >= severity.rawValue {
             let event = Event(id: numEvents,sev: severity, tags: tags, message: message, file: file, method: method, line: line)
-            
-            for a in self.appenders {
-                a.dump(event)
-            }
-            numEvents += 1
+            log(event)
         }
-        
-        
     }
+    
+    
     
     //
     // MARK: - Reset & Default
@@ -130,3 +129,5 @@ final public class Logger{
 
 }
 
+
+func log()

@@ -10,27 +10,19 @@ import Foundation
 
 
 class PlistInputter {
-    func input(file name:String, completion:InputCompletion) throws {
-        
-        //Finish this method later...
-    }
     
-    func input(string:String,completion:InputCompletion) throws{
-        guard let data = string.data(using: String.Encoding.utf8) else {
-            throw IOError.encodeFailure(method: "UTF8")
-        }
+    func read(from path:URL, completion: @escaping InputCompletion){
         do{
-            try input(data:data, completion: completion)
+            let data = try Data(contentsOf: path)
+            read(from:data, completion: completion)
         }catch{
-            throw error
+            completion(nil, error)
         }
     }
-    
-    func input(data:Data,completion:InputCompletion) throws{
+    func read(from string:String,  completion: @escaping InputCompletion){
         
-        guard let obj = try JSONSerialization.jsonObject(with: data as Data, options: []) as? IODict else {
-            throw IOError.invalidFormat(path: String(describing: data), format: "JSON")
-        }
-        completion(obj)
+    }
+    func read(from data:Data,completion: @escaping InputCompletion){
+        completion(nil, nil)
     }
 }

@@ -17,7 +17,9 @@
 		5C717C741E4BB54B00675AA9 /* LayoutDelimiter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C717C731E4BB54B00675AA9 /* LayoutDelimiter.swift */; };
 		5C717C761E4BB60700675AA9 /* LayoutTestComponents.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C717C751E4BB60700675AA9 /* LayoutTestComponents.swift */; };
 		5C717C781E4BB62D00675AA9 /* LayoutTestDelimiters.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C717C771E4BB62D00675AA9 /* LayoutTestDelimiters.swift */; };
-		5C717C7B1E4BB78B00675AA9 /* Concurrency.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C717C7A1E4BB78B00675AA9 /* Concurrency.swift */; };
+		5C717C7B1E4BB78B00675AA9 /* General.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C717C7A1E4BB78B00675AA9 /* General.swift */; };
+		5C79E88F1E60962E00086D30 /* SimpleXMLNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C79E88D1E60962E00086D30 /* SimpleXMLNode.swift */; };
+		5C79E8901E60962E00086D30 /* SimpleXMLParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C79E88E1E60962E00086D30 /* SimpleXMLParser.swift */; };
 		5C7BE6E01E5E286E0091E221 /* AppenderTestBasic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C7BE6DF1E5E286E0091E221 /* AppenderTestBasic.swift */; };
 		5C8192581E452DC50088C021 /* LayoutComponents.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C8192571E452DC50088C021 /* LayoutComponents.swift */; };
 		5CFE9C8E1E438F790066D821 /* Log4s.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5CFE9C841E438F790066D821 /* Log4s.framework */; };
@@ -54,7 +56,9 @@
 		5C717C731E4BB54B00675AA9 /* LayoutDelimiter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LayoutDelimiter.swift; path = Layout/LayoutDelimiter.swift; sourceTree = "<group>"; };
 		5C717C751E4BB60700675AA9 /* LayoutTestComponents.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LayoutTestComponents.swift; path = Layouts/LayoutTestComponents.swift; sourceTree = "<group>"; };
 		5C717C771E4BB62D00675AA9 /* LayoutTestDelimiters.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LayoutTestDelimiters.swift; path = Layouts/LayoutTestDelimiters.swift; sourceTree = "<group>"; };
-		5C717C7A1E4BB78B00675AA9 /* Concurrency.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Concurrency.swift; path = Utils/Concurrency.swift; sourceTree = "<group>"; };
+		5C717C7A1E4BB78B00675AA9 /* General.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = General.swift; path = Utils/General.swift; sourceTree = "<group>"; };
+		5C79E88D1E60962E00086D30 /* SimpleXMLNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SimpleXMLNode.swift; path = IO/SimpleXMLNode.swift; sourceTree = "<group>"; };
+		5C79E88E1E60962E00086D30 /* SimpleXMLParser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SimpleXMLParser.swift; path = IO/SimpleXMLParser.swift; sourceTree = "<group>"; };
 		5C7BE6DF1E5E286E0091E221 /* AppenderTestBasic.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppenderTestBasic.swift; sourceTree = "<group>"; };
 		5C8192571E452DC50088C021 /* LayoutComponents.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LayoutComponents.swift; path = Layout/LayoutComponents.swift; sourceTree = "<group>"; };
 		5CFE9C841E438F790066D821 /* Log4s.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Log4s.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -126,9 +130,18 @@
 		5C717C791E4BB75400675AA9 /* Utils */ = {
 			isa = PBXGroup;
 			children = (
-				5C717C7A1E4BB78B00675AA9 /* Concurrency.swift */,
+				5C717C7A1E4BB78B00675AA9 /* General.swift */,
 			);
 			name = Utils;
+			sourceTree = "<group>";
+		};
+		5C79E8911E60964E00086D30 /* Forks */ = {
+			isa = PBXGroup;
+			children = (
+				5C79E88D1E60962E00086D30 /* SimpleXMLNode.swift */,
+				5C79E88E1E60962E00086D30 /* SimpleXMLParser.swift */,
+			);
+			name = Forks;
 			sourceTree = "<group>";
 		};
 		5C7BE6DE1E5E27720091E221 /* Appender */ = {
@@ -160,6 +173,7 @@
 		5CFE9C861E438F790066D821 /* Log4s */ = {
 			isa = PBXGroup;
 			children = (
+				5C79E8911E60964E00086D30 /* Forks */,
 				5C717C791E4BB75400675AA9 /* Utils */,
 				AB1B3D461E47BF8700145CD1 /* Appenders */,
 				5C7109701E44E7880061937B /* Layouts */,
@@ -329,11 +343,13 @@
 				5CFE9CCE1E439AD20066D821 /* Event.swift in Sources */,
 				5C71096D1E44D10A0061937B /* Appender.swift in Sources */,
 				5C7109691E43C4D20061937B /* IOJSON.swift in Sources */,
+				5C79E88F1E60962E00086D30 /* SimpleXMLNode.swift in Sources */,
 				5C71096B1E43C8190061937B /* IOPlist.swift in Sources */,
 				5C7109671E43C4B90061937B /* IOXML.swift in Sources */,
 				5C717C741E4BB54B00675AA9 /* LayoutDelimiter.swift in Sources */,
 				5C8192581E452DC50088C021 /* LayoutComponents.swift in Sources */,
-				5C717C7B1E4BB78B00675AA9 /* Concurrency.swift in Sources */,
+				5C79E8901E60962E00086D30 /* SimpleXMLParser.swift in Sources */,
+				5C717C7B1E4BB78B00675AA9 /* General.swift in Sources */,
 				5C71096F1E44D13F0061937B /* Layout.swift in Sources */,
 				5CFE9CD01E439B010066D821 /* Consts.swift in Sources */,
 				ABDC0A291E4C0BA10020469A /* LayoutBrackets.swift in Sources */,

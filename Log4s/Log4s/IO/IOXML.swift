@@ -9,31 +9,34 @@
 import Foundation
 
 
-class XMLInputter {
-    func input(file name:String, completion:InputCompletion) throws {
-        guard let path = Bundle.main.path(forResource: name, ofType: "xml") else {
-            throw IOError.fileNotExists(path: name)
-        }
-
-        guard let data = NSData(contentsOfFile: path) else {
-            throw IOError.failedToLoad(path: path)
-        }
+class XMLInputter : Inputter{
+    
+    func read(from path:URL, completion:@escaping InputCompletion){
         do{
-            //try input(data as Data, completion: completion)
+            let data = try Data(contentsOf: path)
+            read(from: data, completion: completion)
         }catch{
-            throw error
+            completion(nil,error)
         }
     }
     
-    func input(string:String,completion:InputCompletion) throws{
-
-    }
-    
-    func input(data:Data,completion:InputCompletion) throws{
+    func read(from string:String,completion: @escaping InputCompletion){
         
-        guard let obj = try JSONSerialization.jsonObject(with: data as Data, options: []) as? IODict else {
-            throw IOError.invalidFormat(path: String(describing: data), format: "JSON")
+    }
+    func read(from data:Data,completion:@escaping InputCompletion){
+        do{
+            let parser = SimpleXMLParser(
+                withSourceData: data,
+                parseCompletionHandler: { (result)-> (Void) in
+                    completion(result, nil)
+            },
+                parseErrorHandler:{ (error) -> (Void) in
+                    print(error)
+                    completion(nil, error)
+            }
+            )
+            
+            parser.start()
         }
-        completion(obj)
     }
 }

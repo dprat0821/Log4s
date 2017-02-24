@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5C7690601E60BA9D00129E98 /* SampleLogging.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C76905F1E60BA9D00129E98 /* SampleLogging.swift */; };
 		5CFE9CAB1E438FB90066D821 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CFE9CAA1E438FB90066D821 /* AppDelegate.swift */; };
 		5CFE9CAD1E438FB90066D821 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CFE9CAC1E438FB90066D821 /* ViewController.swift */; };
 		5CFE9CB01E438FB90066D821 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5CFE9CAE1E438FB90066D821 /* Main.storyboard */; };
@@ -26,6 +27,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		5C76905F1E60BA9D00129E98 /* SampleLogging.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SampleLogging.swift; sourceTree = "<group>"; };
 		5CFE9CA71E438FB90066D821 /* SampleSwiftIOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SampleSwiftIOS.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5CFE9CAA1E438FB90066D821 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		5CFE9CAC1E438FB90066D821 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -78,6 +80,7 @@
 			isa = PBXGroup;
 			children = (
 				5CFE9CAA1E438FB90066D821 /* AppDelegate.swift */,
+				5C76905F1E60BA9D00129E98 /* SampleLogging.swift */,
 				5CFE9CAC1E438FB90066D821 /* ViewController.swift */,
 				5CFE9CAE1E438FB90066D821 /* Main.storyboard */,
 				5CFE9CB11E438FB90066D821 /* Assets.xcassets */,
@@ -203,6 +206,7 @@
 			files = (
 				5CFE9CAD1E438FB90066D821 /* ViewController.swift in Sources */,
 				5CFE9CAB1E438FB90066D821 /* AppDelegate.swift in Sources */,
+				5C7690601E60BA9D00129E98 /* SampleLogging.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -412,6 +416,7 @@
 				5CFE9CC61E438FB90066D821 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		5CFE9CC71E438FB90066D821 /* Build configuration list for PBXNativeTarget "SampleSwiftIOSTests" */ = {
 			isa = XCConfigurationList;
@@ -420,6 +425,7 @@
 				5CFE9CC91E438FB90066D821 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

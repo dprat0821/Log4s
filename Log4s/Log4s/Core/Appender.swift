@@ -102,14 +102,14 @@ open class Appender{
     //  MARK: Dumping
     //
     
-    internal func _dump(_ event: Event, completion: DumpCompletion? = nil) {
+    internal func _dump(_ event: Event, completion: @escaping DumpCompletion) {
         
         if event.sev.rawValue <= maxSeverity.rawValue && self.matchTags(of: event){
             evtQueue.append((event,completion))
             _dequeue()
         }
         else{
-            completion?(nil)
+            completion(nil)
         }
     }
     
@@ -167,9 +167,9 @@ open class Appender{
             - completion: (Optional) The closure to handle possible exceptions during dumping.
      
      */
-    open func dump(_ event: Event, completion: DumpCompletion? = nil){
+    open func dump(_ event: Event, completion: @escaping DumpCompletion){
         print(event.message)
-        completion?(nil)
+        completion(nil)
     }
     
 }

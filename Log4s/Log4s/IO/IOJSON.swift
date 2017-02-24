@@ -10,24 +10,24 @@ import Foundation
 
 
 class JSONInputter : Inputter{
-    func read(path:URL, completion:InputCompletion) {
+    func read(from path:URL, completion:@escaping InputCompletion) {
         do{
             let data = try Data(contentsOf: path)
-            read(data: data, completion: completion)
+            read(from:data, completion: completion)
         }catch{
             completion(nil, error)
         }
     }
     
-    func read(string:String,completion:InputCompletion){
+    func read(from string:String,completion:@escaping InputCompletion){
         guard let data = string.data(using: String.Encoding.utf8) else {
             completion(nil, IOError.encodeFailure(method: "UTF8"))
             return
         }
-        read(data:data, completion: completion)
+        read(from:data, completion: completion)
     }
     
-    func read(data:Data,completion:InputCompletion){
+    func read(from data:Data,completion:@escaping InputCompletion){
         do{
             guard let obj = try JSONSerialization.jsonObject(with: data as Data, options: []) as? IODict else {
                 completion(nil, IOError.invalidFormat(path: String(describing: data), format: "JSON"))
@@ -43,24 +43,19 @@ class JSONInputter : Inputter{
 
 class JSONOutputter : Outputter{
     
-    func write(source: IOValue, toString completion: (String) -> ()) {
-        
-    }
-    func outputString(source:IOValue,completion: (String)->()) throws{
+    func write(stringFrom source:IOValue,completion: @escaping (String?,Error?)->()){
         do{
             let jsonData = try JSONSerialization.data(withJSONObject: source, options: JSONSerialization.WritingOptions())
             let r = String(data:jsonData,encoding: String.Encoding.utf8)
             if let r = r {
-                completion(r)
+                completion(r,nil)
             }
             else{
-                
-                throw IOError.encodeFailure(method: "UTF8")
-                
+                completion(nil,IOError.encodeFailure(method: "UTF8"))
             }
             
         }catch{
-            throw error
+            completion(nil,error)
         }
     }
 }
