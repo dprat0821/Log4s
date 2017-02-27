@@ -101,6 +101,7 @@
 		5CFE9CA91E438FB90066D821 /* SampleSwiftIOS */ = {
 			isa = PBXGroup;
 			children = (
+				AB56148E1E61FE2600E7A835 /* AppenderPersistent.swift */,
 				5CFE9CAA1E438FB90066D821 /* AppDelegate.swift */,
 				5C76905F1E60BA9D00129E98 /* SampleLogging.swift */,
 				5CFE9CAC1E438FB90066D821 /* ViewController.swift */,
@@ -108,7 +109,6 @@
 				5CFE9CB11E438FB90066D821 /* Assets.xcassets */,
 				5CFE9CB31E438FB90066D821 /* LaunchScreen.storyboard */,
 				5CFE9CB61E438FB90066D821 /* Info.plist */,
-				AB56148E1E61FE2600E7A835 /* AppenderPersistent.swift */,
 			);
 			path = SampleSwiftIOS;
 			sourceTree = "<group>";

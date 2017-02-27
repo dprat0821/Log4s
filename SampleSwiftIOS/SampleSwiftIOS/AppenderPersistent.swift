@@ -12,14 +12,22 @@ import Log4s
  AppenderJSONFile will
  */
 
-let defaultSizePerFile = 1000
+let defaultSizePerFile = 1000   //In unit of bytes
 
 class AppenderPersistent: Appender{
     var buffer: String?
-    var size: Int = defaultSizePerFile
+    var size: Int
 
+    init(size: Int = defaultSizePerFile) {
+        self.size = size
+    }
+    
+    
     override func dump(_ event: Event, completion: @escaping (Error?)->Void){
-        print(event.message)
+        buffer += "\n" + event.message
+        if buffer?.characters.count >= size {
+            
+        }
         completion(nil)
     }
 }

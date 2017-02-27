@@ -12,7 +12,7 @@ let defaultErrorDomain = "Log4s"
 
 let LocalizedDescriptionKey = "NSLocalizedDescriptionKey"
 
-class LogError: NSError{
+public class LogError: NSError{
     var _localizedDescription : String?
     
     override public var localizedDescription: String {
@@ -30,7 +30,7 @@ class LogError: NSError{
         super.init(domain: domain, code: code, userInfo: nil)
     }
     
-    required init?(coder aDecoder: NSCoder) {
+    required public init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     

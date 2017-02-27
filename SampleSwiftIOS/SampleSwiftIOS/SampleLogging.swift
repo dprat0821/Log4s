@@ -45,7 +45,7 @@ class SampleLogging{
         Logger.error("An error with basic layout fired!")
         
         //
-        // A little complex layout
+        // A little complex layout (with brackets/embeds)
         //
         logger().layout = "{Prefix} "
             + Layout.brackets("[").embed(Layout.time("HH:mm:ss ") + Layout.severity().uppercased())
@@ -53,6 +53,8 @@ class SampleLogging{
             + Layout.message()
         Logger.error("Another error with a little complex layout fired!")
     }
+    
+    
     
     
     func run() {

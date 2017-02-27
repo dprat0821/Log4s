@@ -12,7 +12,7 @@ import Foundation
 public typealias IOValue = AnyObject
 public typealias IODict = [String:IOValue]
 public typealias IOArray = [IOValue]
-public typealias InputCompletion = (IODict?,Error?) -> ()
+public typealias InputCompletion = (IOValue?,Error?) -> ()
 
 
 

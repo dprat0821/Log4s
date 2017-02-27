@@ -18,6 +18,7 @@
 		5C717C761E4BB60700675AA9 /* LayoutTestComponents.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C717C751E4BB60700675AA9 /* LayoutTestComponents.swift */; };
 		5C717C781E4BB62D00675AA9 /* LayoutTestDelimiters.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C717C771E4BB62D00675AA9 /* LayoutTestDelimiters.swift */; };
 		5C717C7B1E4BB78B00675AA9 /* General.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C717C7A1E4BB78B00675AA9 /* General.swift */; };
+		5C7690641E647A5C00129E98 /* AppenderPersistent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C7690631E647A5C00129E98 /* AppenderPersistent.swift */; };
 		5C79E88F1E60962E00086D30 /* SimpleXMLNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C79E88D1E60962E00086D30 /* SimpleXMLNode.swift */; };
 		5C79E8901E60962E00086D30 /* SimpleXMLParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C79E88E1E60962E00086D30 /* SimpleXMLParser.swift */; };
 		5C7BE6E01E5E286E0091E221 /* AppenderTestBasic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C7BE6DF1E5E286E0091E221 /* AppenderTestBasic.swift */; };
@@ -58,6 +59,7 @@
 		5C717C751E4BB60700675AA9 /* LayoutTestComponents.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LayoutTestComponents.swift; path = Layouts/LayoutTestComponents.swift; sourceTree = "<group>"; };
 		5C717C771E4BB62D00675AA9 /* LayoutTestDelimiters.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LayoutTestDelimiters.swift; path = Layouts/LayoutTestDelimiters.swift; sourceTree = "<group>"; };
 		5C717C7A1E4BB78B00675AA9 /* General.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = General.swift; path = Utils/General.swift; sourceTree = "<group>"; };
+		5C7690631E647A5C00129E98 /* AppenderPersistent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AppenderPersistent.swift; path = Appenders/AppenderPersistent.swift; sourceTree = "<group>"; };
 		5C79E88D1E60962E00086D30 /* SimpleXMLNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SimpleXMLNode.swift; path = IO/SimpleXMLNode.swift; sourceTree = "<group>"; };
 		5C79E88E1E60962E00086D30 /* SimpleXMLParser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SimpleXMLParser.swift; path = IO/SimpleXMLParser.swift; sourceTree = "<group>"; };
 		5C7BE6DF1E5E286E0091E221 /* AppenderTestBasic.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppenderTestBasic.swift; sourceTree = "<group>"; };
@@ -226,6 +228,7 @@
 			isa = PBXGroup;
 			children = (
 				AB7B75241E6240A5002476EA /* AppenderConsole.swift */,
+				5C7690631E647A5C00129E98 /* AppenderPersistent.swift */,
 			);
 			name = Appenders;
 			sourceTree = "<group>";
@@ -360,6 +363,7 @@
 				5C71095C1E43B5B80061937B /* IO.swift in Sources */,
 				5C71095E1E43B77D0061937B /* Error.swift in Sources */,
 				5CFE9CCC1E4397A80066D821 /* Logger.swift in Sources */,
+				5C7690641E647A5C00129E98 /* AppenderPersistent.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
