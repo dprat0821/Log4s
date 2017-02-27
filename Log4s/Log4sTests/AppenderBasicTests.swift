@@ -33,11 +33,12 @@ class AppenderBasicTests: XCTestCase {
         //Use default
         let appender = Appender()
         let evt = Event(id:0,sev:.fatal,message: "TestLog" , file:#file, method:#function, line: #line)
-        appender._dump(evt)
+        appender._dump(evt){error in}
         
         // Assign new Layout
-        appender.add(layout: LayoutTime())
-        appender._dump(evt)
+        appender.layout = LayoutTime()
+        //appender.add(layout: LayoutTime())
+        appender._dump(evt){error in}
         
         // Assign multiple layout
 //        appender

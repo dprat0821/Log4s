@@ -10,12 +10,36 @@ import Foundation
 
 let defaultErrorDomain = "Log4s"
 
-extension NSError{
-    static func make(domain:String = defaultErrorDomain, code:Int, desp:String) -> NSError{
-        return NSError(domain: domain, code: code, userInfo: ["NSLocalizedDescriptionKey" : desp])
-    }
-}
+let LocalizedDescriptionKey = "NSLocalizedDescriptionKey"
 
-enum LoggingError: Error {
+class LogError: NSError{
+    var _localizedDescription : String?
+    
+    override public var localizedDescription: String {
+        get{
+            if let _localizedDescription = _localizedDescription{
+                return _localizedDescription
+            }
+            else{
+                return "Operation cannot be finished"
+            }
+        }
+    }
+    
+    init(_ code: Int, domain: String = defaultErrorDomain) {
+        super.init(domain: domain, code: code, userInfo: nil)
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    @discardableResult func desp(_ string:String) -> LogError {
+        _localizedDescription = string
+        return self
+    }
     
 }
+
+
+

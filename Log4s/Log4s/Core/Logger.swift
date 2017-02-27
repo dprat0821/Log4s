@@ -10,10 +10,9 @@ import Foundation
 
 
 
-func logger(_ name:String = "") -> Logger {
+public func logger(_ name:String = "") -> Logger {
     return Logger.inst(name)
 }
-
 
 
 
@@ -41,30 +40,25 @@ final public class Logger{
         }
     }
     
+    init() {
+        reset()
+    }
+    
     //
     // MARK: - Severities
     //
-    public private(set) var appendersSev = Severity.verbose
-    public var maxSeverity : Severity = .verbose {
-        didSet {
-            syncAppendersSeverity()
-        }
-    }
-    
-    
-    /**
-     
-     */
-    private func syncAppendersSeverity() {
-        var sev = Severity.off
-        for appender in appenders{
-            if appender.maxSeverity.rawValue > sev.rawValue{
-                sev = appender.maxSeverity
+    public var appendersSev: Severity {
+        get{
+            var sev = Severity.off
+            for appender in appenders{
+                if appender.maxSeverity.rawValue > sev.rawValue{
+                    sev = appender.maxSeverity
+                }
             }
+            return sev
         }
-        appendersSev = sev
     }
-    
+    public var maxSeverity : Severity = .verbose
     
     
     
@@ -73,18 +67,42 @@ final public class Logger{
     //
     private var appenders = [Appender]()
     
-    
-    
-    public func add(appender:Appender) -> Logger {
-        appenders.append(appender)
-        NotificationCenter.default.addObserver(forName: nameSetSeverity, object: appender, queue: nil){ notification in
-            self.syncAppendersSeverity()
+    @discardableResult public func add(appender:Appender) -> Logger {
+        if isUsingDefaultConfiguration{
+            appenders.removeAll()
+            isUsingDefaultConfiguration = false
         }
-        syncAppendersSeverity()
+        appenders.append(appender)
         return self
     }
     
+    //
+    // MARK: - Wildcard Layout
+    //
     
+    public var layout:Layout?{
+        set{
+            if let newVal = newValue{
+                for a in appenders{
+                    a.layout = newVal
+                }
+            }
+        }
+        get{
+            var r:Layout? = nil
+            for a in appenders{
+                if r == nil{
+                    r = a.layout
+                }
+                else{
+                    if r !== a.layout{
+                        return nil
+                    }
+                }
+            }
+            return r
+        }
+    }
     
     //
     // MARK: - Logging
@@ -93,7 +111,7 @@ final public class Logger{
     
     func log(_ event: Event){
         for a in self.appenders {
-            a.dump(event){error in}
+            a._dump(event){error in}
         }
         numEvents += 1
     }
@@ -106,28 +124,47 @@ final public class Logger{
         }
     }
     
+    static public func info(_ message: String, tags: [String]? = nil , file: String = #file, method: String = #function, line: UInt = #line){
+        logger().log(message, severity: .info, tags: tags,file:file, method:method, line:line)
+    }
     
+    static public func debug(_ message: String, tags: [String]? = nil , file: String = #file, method: String = #function, line: UInt = #line){
+        logger().log(message, severity: .debug, tags: tags,file:file, method:method, line:line)
+    }
+    
+    static public func error(_ message: String, tags: [String]? = nil , file: String = #file, method: String = #function, line: UInt = #line){
+        logger().log(message, severity: .error, tags: tags,file:file, method:method, line:line)
+    }
+    
+    static public func warn(_ message: String, tags: [String]? = nil , file: String = #file, method: String = #function, line: UInt = #line){
+        logger().log(message, severity: .warn, tags: tags,file:file, method:method, line:line)
+    }
+    
+    static public func fatal(_ message: String, tags: [String]? = nil , file: String = #file, method: String = #function, line: UInt = #line){
+        logger().log(message, severity: .fatal, tags: tags,file:file, method:method, line:line)
+    }
+    
+    static public func verbose(_ message: String, tags: [String]? = nil , file: String = #file, method: String = #function, line: UInt = #line){
+        logger().log(message, severity: .verbose, tags: tags,file:file, method:method, line:line)
+    }
     
     //
     // MARK: - Reset & Default
     //
-    public func resetAppenders(){
-        NotificationCenter.default.removeObserver(self, name: nameSetSeverity, object: nil)
+    public internal(set) var isUsingDefaultConfiguration = true
+    
+    
+    
+    @discardableResult public func reset() -> Logger{
         appenders.removeAll()
-        appendersSev = .off
-    }
-    
-    deinit {
-        NotificationCenter.default.removeObserver(self, name: nameSetSeverity, object: nil)
-    }
-    
-    public func reset(){
-        resetAppenders()
-        maxSeverity = .verbose
+        add(appender: AppenderConsole().reset())
         
+        maxSeverity = .verbose
+        isUsingDefaultConfiguration = true
+        return self
     }
 
 }
 
 
-func log()
+

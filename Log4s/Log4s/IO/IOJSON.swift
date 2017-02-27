@@ -21,7 +21,7 @@ class JSONInputter : Inputter{
     
     func read(from string:String,completion:@escaping InputCompletion){
         guard let data = string.data(using: String.Encoding.utf8) else {
-            completion(nil, IOError.encodeFailure(method: "UTF8"))
+            completion(nil,LogError.invalid(path: string, decodedAs: "UTF8"))
             return
         }
         read(from:data, completion: completion)
@@ -30,7 +30,7 @@ class JSONInputter : Inputter{
     func read(from data:Data,completion:@escaping InputCompletion){
         do{
             guard let obj = try JSONSerialization.jsonObject(with: data as Data, options: []) as? IODict else {
-                completion(nil, IOError.invalidFormat(path: String(describing: data), format: "JSON"))
+                completion(nil,LogError.invalid(path: String(describing:data), decodedAs: "JSON"))
                 return
             }
             completion(obj,nil)
@@ -51,7 +51,7 @@ class JSONOutputter : Outputter{
                 completion(r,nil)
             }
             else{
-                completion(nil,IOError.encodeFailure(method: "UTF8"))
+                completion(nil,LogError.invalid(path: String(describing:jsonData), decodedAs: "UTF8"))
             }
             
         }catch{

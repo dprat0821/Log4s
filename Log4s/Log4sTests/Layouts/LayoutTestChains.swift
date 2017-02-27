@@ -131,4 +131,15 @@ class LayoutTestChains: XCTestCase {
         }
     
     }
+    
+    func testLayoutOperator() {
+        let evt = Event(id:0,sev:.fatal,tags: ["Tag1","Tag2","Tag3"] , message: "TestLog" , file:#file, method:#function, line: #line)
+        let layoutTags = Layout.brackets("{").embed(Layout.tags(dividedBy: ","))
+        let layout2 = "Prefix: " + Layout.brackets().embed(Layout.severity().uppercased()) + " " + layoutTags + " " + Layout.message()
+        
+        layout2._present(evt){(res,error) in
+            print(res)
+            XCTAssert(res == "Prefix: [FATAL] {Tag1,Tag2,Tag3} TestLog")
+        }
+    }
 }

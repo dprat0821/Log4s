@@ -29,6 +29,7 @@
 		5CFE9CCE1E439AD20066D821 /* Event.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CFE9CCD1E439AD20066D821 /* Event.swift */; };
 		5CFE9CD01E439B010066D821 /* Consts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CFE9CCF1E439B010066D821 /* Consts.swift */; };
 		AB1B3D431E45942900145CD1 /* LoggerBasicTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB1B3D421E45942900145CD1 /* LoggerBasicTests.swift */; };
+		AB7B75251E6240A5002476EA /* AppenderConsole.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB7B75241E6240A5002476EA /* AppenderConsole.swift */; };
 		ABDC0A271E4AEC550020469A /* AppenderBasicTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABDC0A261E4AEC550020469A /* AppenderBasicTests.swift */; };
 		ABDC0A291E4C0BA10020469A /* LayoutBrackets.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABDC0A281E4C0BA10020469A /* LayoutBrackets.swift */; };
 		ABDC0A2B1E4C0ED40020469A /* LayoutTestChains.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABDC0A2A1E4C0ED40020469A /* LayoutTestChains.swift */; };
@@ -71,6 +72,7 @@
 		5CFE9CCD1E439AD20066D821 /* Event.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Event.swift; path = Core/Event.swift; sourceTree = "<group>"; };
 		5CFE9CCF1E439B010066D821 /* Consts.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Consts.swift; path = Core/Consts.swift; sourceTree = "<group>"; };
 		AB1B3D421E45942900145CD1 /* LoggerBasicTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoggerBasicTests.swift; sourceTree = "<group>"; };
+		AB7B75241E6240A5002476EA /* AppenderConsole.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AppenderConsole.swift; path = Appenders/AppenderConsole.swift; sourceTree = "<group>"; };
 		ABDC0A261E4AEC550020469A /* AppenderBasicTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppenderBasicTests.swift; sourceTree = "<group>"; };
 		ABDC0A281E4C0BA10020469A /* LayoutBrackets.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LayoutBrackets.swift; path = Layout/LayoutBrackets.swift; sourceTree = "<group>"; };
 		ABDC0A2A1E4C0ED40020469A /* LayoutTestChains.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LayoutTestChains.swift; path = Layouts/LayoutTestChains.swift; sourceTree = "<group>"; };
@@ -223,6 +225,7 @@
 		AB1B3D461E47BF8700145CD1 /* Appenders */ = {
 			isa = PBXGroup;
 			children = (
+				AB7B75241E6240A5002476EA /* AppenderConsole.swift */,
 			);
 			name = Appenders;
 			sourceTree = "<group>";
@@ -348,6 +351,7 @@
 				5C7109671E43C4B90061937B /* IOXML.swift in Sources */,
 				5C717C741E4BB54B00675AA9 /* LayoutDelimiter.swift in Sources */,
 				5C8192581E452DC50088C021 /* LayoutComponents.swift in Sources */,
+				AB7B75251E6240A5002476EA /* AppenderConsole.swift in Sources */,
 				5C79E8901E60962E00086D30 /* SimpleXMLParser.swift in Sources */,
 				5C717C7B1E4BB78B00675AA9 /* General.swift in Sources */,
 				5C71096F1E44D13F0061937B /* Layout.swift in Sources */,

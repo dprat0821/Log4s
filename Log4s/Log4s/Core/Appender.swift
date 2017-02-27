@@ -8,8 +8,13 @@
 
 import Foundation
 
-public typealias DumpCompletion = ( Error? ) -> Void
-public let nameSetSeverity = Notification.Name(rawValue: "severity")
+typealias DumpCompletion = ( Error? ) -> Void
+
+
+extension LogError{
+    static func rejectSev(event: Event, to appender:Appender, since sev:Severity) -> LogError {return LogError(201).desp("Failed dumpping log \(event) to \(appender). Severity higher than (\(sev))")}
+    static func rejectTag(event: Event, to appender:Appender)-> LogError {return LogError(202).desp("Failed dumpping log \(event) to \(appender). tags mismatch")}
+}
 
 public protocol AppenderListener {
     func on(appender: Appender, logged event: Event, with error: Error?)
@@ -36,15 +41,7 @@ public protocol AppenderListener {
  */
 open class Appender{
 
-    public private(set) var layout: Layout = LayoutMessage()
-    public private(set) var isUseDefaultConfig:Bool = true
-    
-    public func useDefaultConfig(){
-        if !isUseDefaultConfig{
-            isUseDefaultConfig = true
-            self.layout = LayoutMessage()
-        }
-    }
+    public var layout: Layout = LayoutMessage()
     
     public var listener: AppenderListener?
     
@@ -52,6 +49,15 @@ open class Appender{
         didSet{
             listener?.on(appender: self, changed: (from:oldValue, to: maxSeverity))
         }
+    }
+    
+    init() {
+        reset()
+    }
+    
+    init(with layout:Layout) {
+        reset()
+        self.layout = layout
     }
     
     /**
@@ -67,7 +73,7 @@ open class Appender{
     public func matchTags(of event:Event) -> Bool{
         if let filter = filterTags, let tags = event.tags{
             let tagsEvent = Set(tags)
-            return filter.intersection(tagsEvent).count == 0
+            return filter.intersection(tagsEvent).count != 0
         }
         else{
             return true
@@ -82,18 +88,13 @@ open class Appender{
     //  MARK: Layouts
     //
     
-    @discardableResult public func add(layout:Layoutable) -> Appender {
-        return self.add(layouts: [layout])
+    public func resetLayout() {
+        layout = LayoutMessage()
     }
     
-    @discardableResult public func add(layouts: [Layoutable]) -> Appender {
-        if isUseDefaultConfig{
-            layout = Layout()
-            isUseDefaultConfig = false
-        }
-        
-        layout.chain(layouts)
-        listener?.on(appender: self, changed: self.layout)
+    @discardableResult public func reset() -> Appender {
+        resetLayout()
+        maxSeverity = .verbose
         return self
     }
     
@@ -103,14 +104,20 @@ open class Appender{
     //
     
     internal func _dump(_ event: Event, completion: @escaping DumpCompletion) {
+        guard event.sev.rawValue <= maxSeverity.rawValue else {
+            completion(LogError.rejectSev(event: event, to: self, since: maxSeverity))
+            return
+        }
         
-        if event.sev.rawValue <= maxSeverity.rawValue && self.matchTags(of: event){
-            evtQueue.append((event,completion))
-            _dequeue()
+        guard matchTags(of: event) else {
+            completion(LogError.rejectTag(event: event, to: self))
+            return
+
         }
-        else{
-            completion(nil)
-        }
+        evtQueue.append((event,completion))
+        _dequeue()
+        
+
     }
     
     
@@ -164,11 +171,10 @@ open class Appender{
         
         - parameters:
             - event: The event to be logged
-            - completion: (Optional) The closure to handle possible exceptions during dumping.
+            - completion: (Optional) The closure to handle possible exceptions fired during dumping.
      
      */
-    open func dump(_ event: Event, completion: @escaping DumpCompletion){
-        print(event.message)
+    open func dump(_ event: Event, completion: @escaping (Error?)->Void){
         completion(nil)
     }
     

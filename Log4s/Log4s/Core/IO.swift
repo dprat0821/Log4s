@@ -16,13 +16,11 @@ public typealias InputCompletion = (IODict?,Error?) -> ()
 
 
 
-enum IOError: Error {
-    case fileNotExists(path:String)
-    case failedToLoad(path:String)
-    case invalidFormat(path:String, format:String)
-    case encodeFailure(method:String)
+extension LogError{
+    static func failedToLoad(path:String) -> LogError {return LogError(101).desp("Failed to read the file (\(path))")}
+    static func invalid(path:String, decodedAs format:String) -> LogError {return LogError(102).desp("Failed to decode (\(path)) to \(format)")}
+    
 }
-
 
 
 public protocol Inputter {

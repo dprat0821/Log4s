@@ -14,6 +14,9 @@
 		5CFE9CB21E438FB90066D821 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5CFE9CB11E438FB90066D821 /* Assets.xcassets */; };
 		5CFE9CB51E438FB90066D821 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5CFE9CB31E438FB90066D821 /* LaunchScreen.storyboard */; };
 		5CFE9CC01E438FB90066D821 /* SampleSwiftIOSTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CFE9CBF1E438FB90066D821 /* SampleSwiftIOSTests.swift */; };
+		AB56148F1E61FE2600E7A835 /* AppenderPersistent.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB56148E1E61FE2600E7A835 /* AppenderPersistent.swift */; };
+		AB7B75221E623EAF002476EA /* Log4s.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AB7B75211E623EAF002476EA /* Log4s.framework */; };
+		AB7B75231E623EAF002476EA /* Log4s.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = AB7B75211E623EAF002476EA /* Log4s.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -25,6 +28,20 @@
 			remoteInfo = SampleSwiftIOS;
 		};
 /* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		AB7B751D1E623DEC002476EA /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				AB7B75231E623EAF002476EA /* Log4s.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		5C76905F1E60BA9D00129E98 /* SampleLogging.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SampleLogging.swift; sourceTree = "<group>"; };
@@ -38,6 +55,8 @@
 		5CFE9CBB1E438FB90066D821 /* SampleSwiftIOSTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SampleSwiftIOSTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		5CFE9CBF1E438FB90066D821 /* SampleSwiftIOSTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SampleSwiftIOSTests.swift; sourceTree = "<group>"; };
 		5CFE9CC11E438FB90066D821 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		AB56148E1E61FE2600E7A835 /* AppenderPersistent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppenderPersistent.swift; sourceTree = "<group>"; };
+		AB7B75211E623EAF002476EA /* Log4s.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Log4s.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -45,6 +64,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AB7B75221E623EAF002476EA /* Log4s.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -61,9 +81,11 @@
 		5CFE9C9E1E438FB90066D821 = {
 			isa = PBXGroup;
 			children = (
+				AB7B75211E623EAF002476EA /* Log4s.framework */,
 				5CFE9CA91E438FB90066D821 /* SampleSwiftIOS */,
 				5CFE9CBE1E438FB90066D821 /* SampleSwiftIOSTests */,
 				5CFE9CA81E438FB90066D821 /* Products */,
+				AB7B75111E623D4D002476EA /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -86,6 +108,7 @@
 				5CFE9CB11E438FB90066D821 /* Assets.xcassets */,
 				5CFE9CB31E438FB90066D821 /* LaunchScreen.storyboard */,
 				5CFE9CB61E438FB90066D821 /* Info.plist */,
+				AB56148E1E61FE2600E7A835 /* AppenderPersistent.swift */,
 			);
 			path = SampleSwiftIOS;
 			sourceTree = "<group>";
@@ -99,6 +122,13 @@
 			path = SampleSwiftIOSTests;
 			sourceTree = "<group>";
 		};
+		AB7B75111E623D4D002476EA /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -109,6 +139,7 @@
 				5CFE9CA31E438FB90066D821 /* Sources */,
 				5CFE9CA41E438FB90066D821 /* Frameworks */,
 				5CFE9CA51E438FB90066D821 /* Resources */,
+				AB7B751D1E623DEC002476EA /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -206,6 +237,7 @@
 			files = (
 				5CFE9CAD1E438FB90066D821 /* ViewController.swift in Sources */,
 				5CFE9CAB1E438FB90066D821 /* AppDelegate.swift in Sources */,
+				AB56148F1E61FE2600E7A835 /* AppenderPersistent.swift in Sources */,
 				5C7690601E60BA9D00129E98 /* SampleLogging.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -346,6 +378,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = 34JYY8BQ79;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				INFOPLIST_FILE = SampleSwiftIOS/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.geekmouse.SampleSwiftIOS;
@@ -359,6 +395,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = 34JYY8BQ79;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				INFOPLIST_FILE = SampleSwiftIOS/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.geekmouse.SampleSwiftIOS;

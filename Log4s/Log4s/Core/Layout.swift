@@ -21,6 +21,10 @@ extension String : Layoutable {
     public func asLayout() -> Layout{
         return LayoutDelimiter.init(self, count: 1)
     }
+    
+    public static func + (left: String, right:Layoutable) -> Layout {
+        return left.asLayout().chain(right)
+    }
 }
 
 open class Layout:Layoutable {
@@ -82,6 +86,10 @@ open class Layout:Layoutable {
         let root = Layout()
         root.chain(layouts)
         return root
+    }
+    
+    static public func + (left: Layout, right: Layoutable) -> Layout {
+        return left.chain(right)
     }
     
     public func resetChain() -> Layout{
