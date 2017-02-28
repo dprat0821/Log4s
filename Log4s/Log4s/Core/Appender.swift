@@ -51,14 +51,14 @@ open class Appender{
         }
     }
     
-    init() {
+    public init() {
         reset()
     }
     
-    init(with layout:Layout) {
-        reset()
-        self.layout = layout
-    }
+//    public init(with layout:Layout) {
+//        reset()
+//        self.layout = layout
+//    }
     
     /**
         Assign a set of tags as one of *Appender*'s filter criteria. *Event* configured with at least one tag listed in *filterTags* will match this criteria.

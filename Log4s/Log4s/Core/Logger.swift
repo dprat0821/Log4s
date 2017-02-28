@@ -24,6 +24,7 @@ final public class Logger{
     static private var _default = Logger()
     static private var dict = [String:Logger]()
     
+    
     static public func inst(_ name: String = "") -> Logger{
         if name == "" {
             return _default

@@ -12,15 +12,26 @@ import Log4s
 let sample = SampleLogging()
 
 class SampleLogging{
-    func runBasicUsage() {
-        //
-        // Basic usage
-        //
+    
+    func run() {
+        print("---- sampleBasicUsage ----")
+        sampleBasicUsage()
+        print("---- sampleBasicLayout ----")
+        sampleBasicLayout()
+        print("---- sampleMultipleAppenders ----")
+        sampleMultipleAppenders()
+    }
+    
+    func sampleBasicUsage() {
+        /**
+         * Basic usage
+         */
         logger().log("This is a debug message",severity: .debug)
         
-        //
-        // Shortcuts for calling with different severities
-        //
+        
+        /**
+         * Shortcuts for calling with different severities
+         */
         Logger.verbose("This is a VERBOSE message")
         Logger.debug("This is a DEBUG message")
         Logger.info("This is an INFO message")
@@ -30,23 +41,23 @@ class SampleLogging{
         
     }
     
-    func runBasicLayout() {
+    func sampleBasicLayout() {
         
         // Reset the configuration
         logger().reset()
         
-        //
-        // Layout with: prefix + event tags + event message body
-        //
+        /**
+         * Layout with: prefix + event tags + event message body
+         */
         logger().layout = "[Prefix] "
             + Layout.time() + " "
             + Layout.message()
-        
         Logger.error("An error with basic layout fired!")
         
-        //
-        // A little complex layout (with brackets/embeds)
-        //
+        
+        /**
+         * A little complex layout (with brackets/embeds)
+         */
         logger().layout = "{Prefix} "
             + Layout.brackets("[").embed(Layout.time("HH:mm:ss ") + Layout.severity().uppercased())
             + Layout.space(times: 3)
@@ -54,13 +65,42 @@ class SampleLogging{
         Logger.error("Another error with a little complex layout fired!")
     }
     
-    
-    
-    
-    func run() {
-        print("---- runBasicUsage ----")
-        runBasicUsage()
-        print("---- runBasicLayout ----")
-        runBasicLayout()
+    func sampleMultipleAppenders() {
+        // Reset the configuration
+        logger().reset()
+        
+        let console = AppenderConsole()
+        console.maxSeverity = .verbose
+        console.layout = Layout.severity().uppercased() + " " + Layout.message()
+        logger().add(appender: console)
+        
+        let localStorage = AppenderPersistent()
+        localStorage.maxSeverity = .info
+        localStorage.layout =
+            Layout.time() + " "
+            + Layout.brackets().embed(Layout.tags()) + " "
+            + Layout.severity().uppercased() + " "
+            + Layout.message()
+        
+        logger().add(appender: localStorage)
+        
+        Logger.debug("This debug message will only be dumped to console")
+        Logger.error("This error message will be dumped to both the console and localStorage. Check the file after app terminated")
+        
+        
     }
+    
+    func sampleTags() {
+        let tag1 = "Tag1"
+        let tag2 = "Tag2"
+        
+        // Reset the configuration
+        logger().reset().layout = "[Prefix] " + Layout.time() + " "
+            + Layout.brackets("[").embed(Layout.tags())
+        
+        
+    }
+    
+    
+    
 }

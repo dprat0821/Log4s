@@ -29,10 +29,7 @@ class JSONInputter : Inputter{
     
     func read(from data:Data,completion:@escaping InputCompletion){
         do{
-            guard let obj = try JSONSerialization.jsonObject(with: data as Data, options: []) as? IODict else {
-                completion(nil,LogError.invalid(path: String(describing:data), decodedAs: "JSON"))
-                return
-            }
+            let obj = try JSONSerialization.jsonObject(with: data as Data, options: [])
             completion(obj,nil)
         }catch{
             completion(nil, error)
