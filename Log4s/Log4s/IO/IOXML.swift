@@ -21,7 +21,9 @@ class XMLInputter : Inputter{
     }
     
     func read(from string:String,completion: @escaping InputCompletion){
-        
+        //
+        // TODO:
+        //
     }
     func read(from data:Data,completion:@escaping InputCompletion){
         do{

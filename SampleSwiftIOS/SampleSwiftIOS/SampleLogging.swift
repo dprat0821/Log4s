@@ -18,10 +18,14 @@ class SampleLogging{
         sampleBasicUsage()
         print("\n---- Use of Some Basic Build-in Layout Components ----")
         sampleBasicLayout()
-        print("\n---- Use Multiple Appenders to Dump Log to Different Destinations----")
+        print("\n---- Use Multiple Appenders to Dump Log to Different Destinations with Different Layouts and MaxSeverities----")
         sampleMultipleAppenders()
-        print("\n---- Use Tags to Assist Log Filters ----")
+        print("\n---- Set Tags to Categorize Logs and Filter Them for Different Appenders ----")
         sampleTags()
+        print("\n---- Use multiple loggers----")
+
+        sampleMutipleLoggers()
+        
     }
     
     func sampleBasicUsage() {
@@ -90,6 +94,7 @@ class SampleLogging{
         
         Logger.debug("This debug message will only be dumped to console")
         Logger.error("This error message will be dumped to both the console and localStorage")
+
         
         
     }
@@ -105,12 +110,41 @@ class SampleLogging{
         logger().reset().layout = "[Prefix] " + Layout.time() + " "
             + Layout.brackets("[").embed(Layout.tags()) + " " + Layout.message()
         
-        //
+        // Try the logs with tags
         Logger.info("User click a button in scene1", tags: [tagUserAction,tagScene1])
         Logger.error("Network failure in scene2", tags: [tagNetwork,tagScene2])
         
+        //Set "tag filters" for different appenders
+        let console = AppenderConsole()
+        console.filterTags = [tagScene1,tagUserAction]
+        logger().add(appender: console)
+        
+        // Try the logs after filter
+        Logger.info("This message without any tag will be logged in the console appender")
+        Logger.error("This message about UserAction will be logged in the console appender", tags: [tagUserAction])
+        Logger.warn("This message about Network will not be logged in the console appender", tags: [tagNetwork])
     }
     
-    
-    
+    func sampleMutipleLoggers() {
+        // Config default logger with console appender only
+        logger().reset()
+        // Config a new logger with two appenders
+        
+        let anotherLogger = logger("another")
+        anotherLogger.reset()
+            .add(appender: AppenderPersistent().with(layout: [
+                Layout.severity().uppercased(),
+                Layout.message()
+                ],dividedBy:"\t"))
+            .add(appender: AppenderConsole().with(layout: [
+                "[Prefix]",
+                Layout.time(),
+                Layout.brackets("[").embed(Layout.tags().dividedBy(by: "|")),
+                Layout.severity().uppercased(),
+                Layout.message()
+                ]))
+        
+        logger().log("This message comes from the default logger", severity: .info, tags: ["Tag0"])
+        anotherLogger.log("This message comes from another logger", severity: .error, tags: ["Tag1","Tag2"])
+    }
 }

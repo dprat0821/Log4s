@@ -15,6 +15,7 @@ public protocol Layoutable {
     func asLayout() -> Layout
 }
 
+let defaultChainDelimiter = " "
 
 extension String : Layoutable {
 
@@ -23,7 +24,9 @@ extension String : Layoutable {
     }
     
     public static func + (left: String, right:Layoutable) -> Layout {
-        return left.asLayout().chain(right)
+        let r = left.asLayout()
+        r.next = right.asLayout()
+        return r
     }
 }
 
@@ -61,18 +64,17 @@ open class Layout:Layoutable {
         return nodeNow
     }
     
-    @discardableResult public func chain(_ layout:Layoutable) -> Layout{
-        let last = self.last()
-        last.next = layout.asLayout()
+    @discardableResult public func chain(_ layout:Layoutable, dividedBy delimiter:String = defaultChainDelimiter) -> Layout{
+        self.last().next = delimiter + layout.asLayout()
         return self
     }
     
-    @discardableResult public func chain(_ layouts:[Layoutable]) -> Layout{
+    @discardableResult public func chain(_ layouts:[Layoutable], dividedBy delimiter:String = defaultChainDelimiter) -> Layout{
         var nowNode = self
         
         for l in layouts{
             let node = l.asLayout()
-            nowNode.chain(node)
+            nowNode.chain(node, dividedBy: delimiter)
             nowNode = node
         }
         return self
@@ -82,14 +84,26 @@ open class Layout:Layoutable {
         return layout.asLayout()
     }
     
-    static public func chain(_ layouts:[Layoutable]) -> Layout{
-        let root = Layout()
-        root.chain(layouts)
-        return root
+    static public func chain(_ layouts:[Layoutable], dividedBy delimiter:String = defaultChainDelimiter) -> Layout{
+        if layouts.count == 0 {
+            return Layout()
+        }
+        else{
+            let root = layouts[0].asLayout()
+            var last = root.last()
+            for l in layouts[1...layouts.count - 1 ] {
+                last.chain(l,dividedBy: delimiter)
+                last = last.last()
+            }
+            return root
+        }
+        
     }
     
     static public func + (left: Layout, right: Layoutable) -> Layout {
-        return left.chain(right)
+        left.last().next = right.asLayout()
+        return left
+        //return left.chain(right)
     }
     
     public func resetChain() -> Layout{

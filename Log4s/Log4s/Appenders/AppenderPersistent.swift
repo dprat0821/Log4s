@@ -21,7 +21,6 @@ public class AppenderPersistent: Appender{
     private var numFilesEstimate: Int = 0
     
     var buffer: String = ""
-    
 
     
     override public func dump(_ event: Event, completion: @escaping (Error?)-> Void){

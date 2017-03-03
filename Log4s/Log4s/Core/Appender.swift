@@ -92,6 +92,28 @@ open class Appender{
         layout = LayoutMessage()
     }
     
+    @discardableResult public func with(layout: Layoutable) -> Appender {
+        self.layout = layout.asLayout()
+        return self
+    }
+    
+    @discardableResult public func with(layout:[Layoutable], dividedBy delimiter:String = defaultChainDelimiter) -> Appender {
+        self.layout = Layout.chain(layout,dividedBy: delimiter)
+        
+        return self
+    }
+    
+    
+    @discardableResult public func with(maxSev: Severity) -> Appender {
+        self.maxSeverity = maxSev
+        return self
+    }
+    
+    @discardableResult public func with(filterTags:Set<String>) -> Appender {
+        self.filterTags = filterTags
+        return self
+    }
+    
     @discardableResult public func reset() -> Appender {
         resetLayout()
         maxSeverity = .verbose
@@ -177,5 +199,7 @@ open class Appender{
     open func dump(_ event: Event, completion: @escaping (Error?)->Void){
         completion(nil)
     }
+    
+    
     
 }
