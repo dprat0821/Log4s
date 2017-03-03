@@ -24,6 +24,7 @@ final public class Logger{
     static private var _default = Logger()
     static private var dict = [String:Logger]()
     
+    
     static public func inst(_ name: String = "") -> Logger{
         if name == "" {
             return _default
@@ -107,7 +108,7 @@ final public class Logger{
     //
     // MARK: - Logging
     //
-    public private(set) var numEvents: UInt = 0
+    private(set) var numEvents: UInt = 0
     
     func log(_ event: Event){
         for a in self.appenders {
@@ -115,6 +116,7 @@ final public class Logger{
         }
         numEvents += 1
     }
+    
     
     
     public func log(_ message: String, severity: Severity = .info, tags: [String]? = nil , file: String = #file, method: String = #function, line: UInt = #line) {
