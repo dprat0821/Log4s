@@ -6,6 +6,20 @@
 	objectVersion = 46;
 	objects = {
 
+/* Begin PBXAggregateTarget section */
+		ABCC46021E6B7379007C5CF7 /* Universal */ = {
+			isa = PBXAggregateTarget;
+			buildConfigurationList = ABCC46051E6B7379007C5CF7 /* Build configuration list for PBXAggregateTarget "Universal" */;
+			buildPhases = (
+				ABD8CCA91E6B739E009DF13F /* ShellScript */,
+			);
+			dependencies = (
+			);
+			name = Universal;
+			productName = Universal;
+		};
+/* End PBXAggregateTarget section */
+
 /* Begin PBXBuildFile section */
 		5C71095C1E43B5B80061937B /* IO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C71095B1E43B5B80061937B /* IO.swift */; };
 		5C71095E1E43B77D0061937B /* Error.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C71095D1E43B77D0061937B /* Error.swift */; };
@@ -30,6 +44,7 @@
 		5CFE9CCE1E439AD20066D821 /* Event.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CFE9CCD1E439AD20066D821 /* Event.swift */; };
 		5CFE9CD01E439B010066D821 /* Consts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CFE9CCF1E439B010066D821 /* Consts.swift */; };
 		AB1B3D431E45942900145CD1 /* LoggerBasicTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB1B3D421E45942900145CD1 /* LoggerBasicTests.swift */; };
+		AB2837D81E6CF73700958233 /* LayoutTestBasic.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB2837D71E6CF73700958233 /* LayoutTestBasic.swift */; };
 		AB7B75251E6240A5002476EA /* AppenderConsole.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB7B75241E6240A5002476EA /* AppenderConsole.swift */; };
 		ABDC0A271E4AEC550020469A /* AppenderBasicTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABDC0A261E4AEC550020469A /* AppenderBasicTests.swift */; };
 		ABDC0A291E4C0BA10020469A /* LayoutBrackets.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABDC0A281E4C0BA10020469A /* LayoutBrackets.swift */; };
@@ -74,6 +89,7 @@
 		5CFE9CCD1E439AD20066D821 /* Event.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Event.swift; path = Core/Event.swift; sourceTree = "<group>"; };
 		5CFE9CCF1E439B010066D821 /* Consts.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Consts.swift; path = Core/Consts.swift; sourceTree = "<group>"; };
 		AB1B3D421E45942900145CD1 /* LoggerBasicTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoggerBasicTests.swift; sourceTree = "<group>"; };
+		AB2837D71E6CF73700958233 /* LayoutTestBasic.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LayoutTestBasic.swift; path = Layouts/LayoutTestBasic.swift; sourceTree = "<group>"; };
 		AB7B75241E6240A5002476EA /* AppenderConsole.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AppenderConsole.swift; path = Appenders/AppenderConsole.swift; sourceTree = "<group>"; };
 		ABDC0A261E4AEC550020469A /* AppenderBasicTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppenderBasicTests.swift; sourceTree = "<group>"; };
 		ABDC0A281E4C0BA10020469A /* LayoutBrackets.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LayoutBrackets.swift; path = Layout/LayoutBrackets.swift; sourceTree = "<group>"; };
@@ -127,6 +143,7 @@
 				5C717C751E4BB60700675AA9 /* LayoutTestComponents.swift */,
 				ABDC0A2C1E4C0EE90020469A /* LayoutTestBrackets.swift */,
 				ABDC0A2A1E4C0ED40020469A /* LayoutTestChains.swift */,
+				AB2837D71E6CF73700958233 /* LayoutTestBasic.swift */,
 			);
 			name = Layouts;
 			sourceTree = "<group>";
@@ -304,6 +321,11 @@
 						DevelopmentTeam = 34JYY8BQ79;
 						ProvisioningStyle = Automatic;
 					};
+					ABCC46021E6B7379007C5CF7 = {
+						CreatedOnToolsVersion = 8.2.1;
+						DevelopmentTeam = 34JYY8BQ79;
+						ProvisioningStyle = Automatic;
+					};
 				};
 			};
 			buildConfigurationList = 5CFE9C7E1E438F790066D821 /* Build configuration list for PBXProject "Log4s" */;
@@ -320,6 +342,7 @@
 			targets = (
 				5CFE9C831E438F790066D821 /* Log4s */,
 				5CFE9C8C1E438F790066D821 /* Log4sTests */,
+				ABCC46021E6B7379007C5CF7 /* Universal */,
 			);
 		};
 /* End PBXProject section */
@@ -340,6 +363,22 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		ABD8CCA91E6B739E009DF13F /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Merge Script\n\n# 1\n# Set bash script to exit immediately if any commands fail.\nset -e\n\n# 2\n# Setup some constants for use later on.\nFRAMEWORK_NAME=\"Log4s\"\n\n# 3\n# If remnants from a previous build exist, delete them.\nif [ -d \"${SRCROOT}/build\" ]; then\nrm -rf \"${SRCROOT}/build\"\nfi\n\n# 4\n# Build the framework for device and for simulator (using\n# all needed architectures).\nxcodebuild -target \"${FRAMEWORK_NAME}\" -configuration Release -arch arm64 -arch armv7 -arch armv7s only_active_arch=no defines_module=yes -sdk \"iphoneos\"\nxcodebuild -target \"${FRAMEWORK_NAME}\" -configuration Release -arch x86_64 -arch i386 only_active_arch=no defines_module=yes -sdk \"iphonesimulator\"\n\n# 5\n# Remove .framework file if exists on Desktop from previous run.\nif [ -d \"${HOME}/Desktop/${FRAMEWORK_NAME}.framework\" ]; then\nrm -rf \"${HOME}/Desktop/${FRAMEWORK_NAME}.framework\"\nfi\n\n# 6\n# Copy the device version of framework to Desktop.\ncp -r \"${SRCROOT}/build/Release-iphoneos/${FRAMEWORK_NAME}.framework\" \"${HOME}/Desktop/${FRAMEWORK_NAME}.framework\"\n\n# 7\n# Replace the framework executable within the framework with\n# a new version created by merging the device and simulator\n# frameworks' executables with lipo.\nlipo -create -output \"${HOME}/Desktop/${FRAMEWORK_NAME}.framework/${FRAMEWORK_NAME}\" \"${SRCROOT}/build/Release-iphoneos/${FRAMEWORK_NAME}.framework/${FRAMEWORK_NAME}\" \"${SRCROOT}/build/Release-iphonesimulator/${FRAMEWORK_NAME}.framework/${FRAMEWORK_NAME}\"\n\n# 8\n# Copy the Swift module mappings for the simulator into the\n# framework.  The device mappings already exist from step 6.\ncp -r \"${SRCROOT}/build/Release-iphonesimulator/${FRAMEWORK_NAME}.framework/Modules/${FRAMEWORK_NAME}.swiftmodule/\" \"${HOME}/Desktop/${FRAMEWORK_NAME}.framework/Modules/${FRAMEWORK_NAME}.swiftmodule\"\n\n# 9\n# Delete the most recent build.\nif [ -d \"${SRCROOT}/build\" ]; then\nrm -rf \"${SRCROOT}/build\"\nfi";
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		5CFE9C7F1E438F790066D821 /* Sources */ = {
@@ -374,6 +413,7 @@
 				5C717C761E4BB60700675AA9 /* LayoutTestComponents.swift in Sources */,
 				ABDC0A2B1E4C0ED40020469A /* LayoutTestChains.swift in Sources */,
 				ABDC0A271E4AEC550020469A /* AppenderBasicTests.swift in Sources */,
+				AB2837D81E6CF73700958233 /* LayoutTestBasic.swift in Sources */,
 				5C7BE6E01E5E286E0091E221 /* AppenderTestBasic.swift in Sources */,
 				ABDC0A2D1E4C0EE90020469A /* LayoutTestBrackets.swift in Sources */,
 				AB1B3D431E45942900145CD1 /* LoggerBasicTests.swift in Sources */,
@@ -562,6 +602,22 @@
 			};
 			name = Release;
 		};
+		ABCC46031E6B7379007C5CF7 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				DEVELOPMENT_TEAM = 34JYY8BQ79;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		ABCC46041E6B7379007C5CF7 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				DEVELOPMENT_TEAM = 34JYY8BQ79;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -588,6 +644,15 @@
 			buildConfigurations = (
 				5CFE9C9C1E438F790066D821 /* Debug */,
 				5CFE9C9D1E438F790066D821 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		ABCC46051E6B7379007C5CF7 /* Build configuration list for PBXAggregateTarget "Universal" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				ABCC46031E6B7379007C5CF7 /* Debug */,
+				ABCC46041E6B7379007C5CF7 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

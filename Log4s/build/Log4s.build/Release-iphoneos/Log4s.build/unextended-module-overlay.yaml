@@ -1,0 +1,13 @@
+{
+  'version': 0,
+  'case-sensitive': 'false',
+  'roots': [{
+    'type': 'directory',
+    'name': '/Users/danielpan/Projects/Projects/Log4s/Log4s/build/Release-iphoneos/Log4s.framework/Modules'
+    'contents': [{
+      'type': 'file',
+      'name': 'module.modulemap',
+      'external-contents': '/Users/danielpan/Projects/Projects/Log4s/Log4s/build/Log4s.build/Release-iphoneos/Log4s.build/unextended-module.modulemap',
+    }]
+  }]
+}

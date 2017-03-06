@@ -92,24 +92,24 @@ open class Appender{
         layout = LayoutMessage()
     }
     
-    @discardableResult public func with(layout: Layoutable) -> Appender {
+    @discardableResult public func use(layout: Layoutable) -> Appender {
         self.layout = layout.asLayout()
         return self
     }
     
-    @discardableResult public func with(layout:[Layoutable], dividedBy delimiter:String = defaultChainDelimiter) -> Appender {
+    @discardableResult public func use(layout:[Layoutable], dividedBy delimiter:String = defaultChainDelimiter) -> Appender {
         self.layout = Layout.chain(layout,dividedBy: delimiter)
         
         return self
     }
     
     
-    @discardableResult public func with(maxSev: Severity) -> Appender {
+    @discardableResult public func use(maxSev: Severity) -> Appender {
         self.maxSeverity = maxSev
         return self
     }
     
-    @discardableResult public func with(filterTags:Set<String>) -> Appender {
+    @discardableResult public func use(filterTags:Set<String>) -> Appender {
         self.filterTags = filterTags
         return self
     }

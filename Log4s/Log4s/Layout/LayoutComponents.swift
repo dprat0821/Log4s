@@ -43,10 +43,14 @@ public class LayoutTime: Layout {
 //
 // MARK: LayoutSeverity
 //
-public typealias severtiy = LayoutSeverity
+public typealias severity = LayoutSeverity
 public class LayoutSeverity: Layout {
     override public func present(_ event:Event) -> String {
         return String(describing: event.sev).using(letterCase)
+    }
+    public init(){
+        super.init()
+        letterCase = .upper
     }
 }
 
@@ -74,6 +78,7 @@ public class LayoutTags: Layout{
     }
 
 }
+
 
 //
 // MARK: LayoutMessage

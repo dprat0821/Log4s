@@ -30,10 +30,14 @@ extension String : Layoutable {
     }
 }
 
+func noLayoutClosure(event: Event) -> String { return "" }
+
 open class Layout:Layoutable {
     public var letterCase: Case = Case.normal
 
     public internal(set) var next: Layout?
+    
+    var presentClosure: (Event)->String
     
     public final func asLayout() -> Layout{
         return self
@@ -80,9 +84,6 @@ open class Layout:Layoutable {
         return self
     }
     
-    static public func chain(_ layout:Layoutable) -> Layout {
-        return layout.asLayout()
-    }
     
     static public func chain(_ layouts:[Layoutable], dividedBy delimiter:String = defaultChainDelimiter) -> Layout{
         if layouts.count == 0 {
@@ -103,7 +104,6 @@ open class Layout:Layoutable {
     static public func + (left: Layout, right: Layoutable) -> Layout {
         left.last().next = right.asLayout()
         return left
-        //return left.chain(right)
     }
     
     public func resetChain() -> Layout{
@@ -125,8 +125,14 @@ open class Layout:Layoutable {
      override this method
      */
     open func present(_ event:Event) -> String {
-        return ""
+        return self.presentClosure(event)
     }
+    
+    public init(_ presentClosure:@escaping (Event)->String = noLayoutClosure) {
+        self.presentClosure = presentClosure
+        
+    }
+
 }
 
 

@@ -1,0 +1,10 @@
+framework module Log4s {
+  umbrella header "Log4s.h"
+
+  export *
+  module * { export * }
+}
+
+module Log4s.__Swift {
+    exclude header "Log4s-Swift.h"
+}

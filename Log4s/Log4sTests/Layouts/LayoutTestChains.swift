@@ -35,14 +35,15 @@ class LayoutTestChains: XCTestCase {
         let timePrefix = layout.present(evt)
         
         //Chain layouts one by one
-        layout.chain(Layout.tab())
+        layout
+            .chain(Layout.tab())
             .chain(Layout.severity().uppercased())
-            .chain(Layout.space(times:2))
+            //.chain(Layout.space(times:2))
             .chain(Layout.message())
         
         layout._present(evt){ (res, error) in
             print(res)
-            XCTAssert( res == "\(timePrefix)\tFATAL  TestLog" )
+            XCTAssert( res == "\(timePrefix) \t FATAL TestLog" )
         }
         
         
@@ -63,7 +64,17 @@ class LayoutTestChains: XCTestCase {
             ])
             ._present(evt){ (res, error) in
                 print(res)
-                XCTAssert( res == "\tFATAL\n    TestLog" )
+                XCTAssert( res == "\t FATAL \n      TestLog" )
+        }
+    }
+    
+    func testLayoutChainWithPlusMark() {
+        let evt = Event(id:0,sev:.fatal,tags: ["Tag1","Tag2","Tag3"] , message: "TestLog" , file:#file, method:#function, line: #line)
+        
+        ("[Prefix] " + Layout.tags(dividedBy: ",") + " " + Layout.message())
+            ._present(evt){(res, error) in
+                print(res)
+                XCTAssert( res == "[Prefix] Tag1,Tag2,Tag3 TestLog" )
         }
     }
     
@@ -73,12 +84,12 @@ class LayoutTestChains: XCTestCase {
         Layout.chain([
             "Start:",
             Layout.severity(),
-            "  Body: ",
+            "Body:",
             Layout.message().lowercased()
             ])
             ._present(evt){ (res, error) in
                 print(res)
-                XCTAssert( res == "Start:fatal  Body: testlog" )
+                XCTAssert( res == "Start: FATAL Body: testlog" )
     }
     
     // Call chains for multiple times

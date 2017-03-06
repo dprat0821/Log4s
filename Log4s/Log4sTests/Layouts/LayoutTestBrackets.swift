@@ -83,7 +83,7 @@ class LayoutTestBrackets: XCTestCase {
     }
 
     
-    func testAsLayout()  {
+    func testAsBracketLayout()  {
         let evt = Event(id:0,sev:.fatal,tags: ["Tag1","Tag2","Tag3"] , message: "TestLog" , file:#file, method:#function, line: #line)
 
         "(".asBracketsLayout().embed(
@@ -100,24 +100,23 @@ class LayoutTestBrackets: XCTestCase {
         let evt = Event(id:0,sev:.fatal,tags: ["Tag1","Tag2","Tag3"] , message: "TestLog" , file:#file, method:#function, line: #line)
 
         Layout.chain([
-            "Start:\t",
+            "Start:",
             Layout.brackets("{").embed(
                 Layout.brackets("<").embed(
                     Layout.brackets("(").embed(
                         Layout.brackets("[").embed(
                             Layout.chain([
                                 Layout.tags(dividedBy: "%").uppercased(),
-                                Layout.tab(times: 2),
                                 Layout.message()
-                            ])
+                                ],dividedBy:" ")
                         )
                     )
                 )
             ),
-            "\tEnd"
-            ])._present(evt){ (res, error) in
+            "End"
+            ],dividedBy:"\t")._present(evt){ (res, error) in
                 print(res)
-                XCTAssert(res == "Start:\t{<([TAG1%TAG2%TAG3\t\tTestLog])>}\tEnd")
+                XCTAssert(res == "Start:\t{<([TAG1%TAG2%TAG3 TestLog])>}\tEnd")
         }
     }
     

@@ -23,8 +23,9 @@ class SampleLogging{
         print("\n---- Set Tags to Categorize Logs and Filter Them for Different Appenders ----")
         sampleTags()
         print("\n---- Use multiple loggers----")
-
         sampleMutipleLoggers()
+        print("\n---- Define Custom Levels ----")
+        sampleCustomLevel()
         
     }
     
@@ -32,68 +33,81 @@ class SampleLogging{
         /**
          * Basic usage
          */
-        logger().log("This is a debug message",severity: .debug)
+        Logger.log("This is a logging message",severity:.debug)
         
         
         /**
          * Shortcuts for calling with different severities
          */
-        Logger.verbose("This is a VERBOSE message")
-        Logger.debug("This is a DEBUG message")
-        Logger.info("This is an INFO message")
-        Logger.warn("This is a WARN message")
-        Logger.error("This is an ERROR message")
-        Logger.fatal("This is a FATAL message")
+        Logger
+            .verbose("This is a VERBOSE message")
+            .debug("This is a DEBUG message")
+            .info("This is an INFO message")
+            .warn("This is a WARN message")
+            .error("This is an ERROR message")
+            .fatal("This is a FATAL message")
         
     }
     
     func sampleBasicLayout() {
         
         // Reset the configuration
-        logger().reset()
+        Logger.reset()
         
         /**
          * Layout with: prefix + event tags + event message body
          */
-        logger().layout = "[Prefix] "
-            + Layout.time() + " "
-            + Layout.message()
-        Logger.error("An error with basic layout fired!")
+        Logger.use(layout: [
+            "[Prefix]",
+            Layout.time(),
+            Layout.message()
+            ])
+            .error("An error with basic layout fired!")
         
         
         /**
          * A little complex layout (with brackets/embeds)
          */
-        logger().layout = "{Prefix} "
+        Logger.layout = "{Prefix} "
             + Layout.brackets("[").embed(Layout.time("HH:mm:ss ") + Layout.severity().uppercased())
             + Layout.space(times: 3)
             + Layout.message()
         Logger.error("Another error with a little complex layout fired!")
+        
+        /**
+         * Use closure for custom layout
+         */
+        Logger.use(layout: Layout(){ (event) -> String in
+            return "'MyLayout' [\(String(describing: event.sev).uppercased())] \(event.message)"
+        })
+        Logger.error("This is an error message presented by customized layout")
     }
     
     func sampleMultipleAppenders() {
         // Reset the configuration
-        logger().reset()
+        Logger.reset()
         
         // Appender 1: Console
         let console = AppenderConsole()
         console.maxSeverity = .verbose
         console.layout = Layout.severity().uppercased() + " " + Layout.message()
-        logger().add(appender: console)
+        Logger.add(appender: console)
         
         // Appender 2: Local storage in the cache path
         let localStorage = AppenderPersistent()
-        localStorage.maxSeverity = .info
-        localStorage.layout =
-            Layout.time() + " "
-            + Layout.brackets().embed(Layout.tags()) + " "
-            + Layout.severity().uppercased() + " "
-            + Layout.message()
+            .use(maxSev: .info)
+            .use(layout: [
+                Layout.time(),
+                Layout.brackets().embed(Layout.tags()),
+                Layout.severity().uppercased(),
+                Layout.message()
+                ])
+
         
-        logger().add(appender: localStorage)
-        
-        Logger.debug("This debug message will only be dumped to console")
-        Logger.error("This error message will be dumped to both the console and localStorage")
+        Logger
+            .add(appender: localStorage)
+            .debug("This debug message will only be dumped to console")
+            .error("This error message will be dumped to both the console and localStorage")
 
         
         
@@ -107,7 +121,7 @@ class SampleLogging{
         
         
         // Reset the configuration with new layout
-        logger().reset().layout = "[Prefix] " + Layout.time() + " "
+        Logger.reset().layout = "[Prefix] " + Layout.time() + " "
             + Layout.brackets("[").embed(Layout.tags()) + " " + Layout.message()
         
         // Try the logs with tags
@@ -117,7 +131,7 @@ class SampleLogging{
         //Set "tag filters" for different appenders
         let console = AppenderConsole()
         console.filterTags = [tagScene1,tagUserAction]
-        logger().add(appender: console)
+        Logger.add(appender: console)
         
         // Try the logs after filter
         Logger.info("This message without any tag will be logged in the console appender")
@@ -132,11 +146,11 @@ class SampleLogging{
         
         let anotherLogger = logger("another")
         anotherLogger.reset()
-            .add(appender: AppenderPersistent().with(layout: [
+            .add(appender: AppenderPersistent().use(layout: [
                 Layout.severity().uppercased(),
                 Layout.message()
                 ],dividedBy:"\t"))
-            .add(appender: AppenderConsole().with(layout: [
+            .add(appender: AppenderConsole().use(layout: [
                 "[Prefix]",
                 Layout.time(),
                 Layout.brackets("[").embed(Layout.tags().dividedBy(by: "|")),
@@ -147,4 +161,26 @@ class SampleLogging{
         logger().log("This message comes from the default logger", severity: .info, tags: ["Tag0"])
         anotherLogger.log("This message comes from another logger", severity: .error, tags: ["Tag1","Tag2"])
     }
+    
+    
+    
+    func sampleCustomLevel() {
+        
+        Logger
+            .reset()
+            .use(maxSev:.error)
+            .use(layout: [
+                Layout.brackets().embed(Layout.severity().uppercased()),
+                Layout.message()
+            ])
+            .log("This message with custom severity 'notVeryVerbose' will not be logged", severity: .notVeryVerbose)
+            .log("This message with custom severity 'terribleError' will be logged", severity: .terribleError)
+        
+    }
+}
+
+// Custom levels
+extension Severity{
+    static let notVeryVerbose = Severity(rawValue: 550,desp:"notVeryVerbose")
+    static let terribleError = Severity(rawValue: 150,desp:"terribleError")
 }

@@ -59,7 +59,6 @@ class SimpleXMLNode: NSObject {
      */
     init(name:String) {
         self.name = name
-        
         super.init()
     }
     
